@@ -1,3 +1,7 @@
 import CardGame from "./components/CardGame.js";
 
-const cardGame = new CardGame(난이도);
+const $main = document.querySelector(".main-wrapper");
+const cardgame = new CardGame($main);
+
+cardgame.setup();
+cardgame.addEvent();
