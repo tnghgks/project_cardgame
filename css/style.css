@@ -1,79 +1,79 @@
 /* 레이아웃 */
 .ir {
-    position: absolute;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
 }
 
 body {
-    background-image: url('../img/pikachu.png');
-    background-size: 25%;
+  background-image: url("../img/pikachu.png");
+  background-size: 25%;
 }
 
 .arti-level-setting {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .arti-level-setting button {
-    padding: 15px 50px;
+  padding: 15px 50px;
 }
 
 /* 메인 화면 */
 
 .tit-game {
-    font-size: 4rem;
-    text-align: center;
-    margin: 130px 0px;
+  font-size: 4rem;
+  text-align: center;
+  margin: 130px 0px;
 }
 
 .main-wrapper .list-score-board-content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .list-card {
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
 }
 .item-card {
-    position: relative;
+  position: relative;
 }
 
 .div-back {
-    background-image: url('../img/card-back.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 150px;
-    height: 224px;
+  background-image: url("../img/card-back.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 224px;
 }
 
 .div-front {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: url('../img/pokemon.png');
-    width: 100px;
-    height: 100px;
-    display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("../img/pokemon.png");
+  width: 100px;
+  height: 100px;
+  display: block;
 }
 
 .div-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
