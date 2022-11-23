@@ -1,3 +1,22 @@
+/* 폰트 */
+@font-face {
+  font-family: "Ycomputer-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 애니메이션 */
+@keyframes move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1000px -1000px;
+  }
+}
+
 /* 레이아웃 */
 .ir {
   position: absolute;
@@ -9,27 +28,39 @@
 }
 
 body {
+  background-color: rgb(9, 255, 0);
   background-image: url("../img/pikachu.png");
   background-size: 25%;
+  animation: move 10s linear infinite;
 }
 
-.arti-level-setting {
+.main-wrapper .arti-level-setting {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
 
-.arti-level-setting button {
-  padding: 15px 50px;
+/* 메인 화면 */
+.tit-game {
+  font-family: "Ycomputer-Regular";
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -4px 0 red, 0 4px green, 4px 0 blue, 10px -4px purple;
+  color: yellow;
+  margin: 130px 0px;
 }
 
-/* 메인 화면 */
-
-.tit-game {
-  font-size: 4rem;
-  text-align: center;
-  margin: 130px 0px;
+.main-wrapper .arti-level-setting button {
+  font-family: "Ycomputer-Regular";
+  font-weight: bold;
+  border: 5px outset white;
+  background-color: lightgray;
+  padding: 15px 50px;
+}
+.main-wrapper .arti-level-setting button:active {
+  border: 5px inset white;
 }
 
 .main-wrapper .list-score-board-content {
@@ -37,23 +68,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 130px;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-}
-
+/* 카드 스타일 */
 .list-card {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 10px;
+  /* perspective: 1000px; */
 }
+
 .item-card {
   position: relative;
+  /* transition: all 1s;
+  transform-style: preserve-3d; */
 }
+
+/* .item-card:active {
+  transform: rotateY(180deg);
+} */
 
 .div-back {
   background-image: url("../img/card-back.png");
@@ -61,6 +97,7 @@ footer {
   background-repeat: no-repeat;
   width: 150px;
   height: 224px;
+  /* backface-visibility: hidden; */
 }
 
 .div-front {
@@ -72,8 +109,17 @@ footer {
   width: 100px;
   height: 100px;
   display: block;
+  /* transform: rotateY(180deg); */
+  /* backface-visibility: hidden; */
 }
 
 .div-hidden {
   visibility: hidden;
+}
+
+/* footer */
+footer {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
 }

@@ -52,6 +52,7 @@ class CardGame extends Component {
 
     title.classList.add("ir");
     document.body.style.backgroundImage = "none";
+    document.body.style.backgroundColor = "white";
 
     this.paintCardGame(event.target.dataset.level);
   }
@@ -59,6 +60,7 @@ class CardGame extends Component {
   showMenu() {
     document.querySelector(".tit-game").classList.remove("ir");
     document.body.style.backgroundImage = "url('../img/pikachu.png')";
+    document.body.style.backgroundColor = "rgb(9, 255, 0)";
   }
 
   addEvent() {
