@@ -1,19 +1,18 @@
 class Component {
-    constructor($target) {
-      this.$target = $target;
-    }
-    setup() {
-      this.render();
-    }
-  
-    render() {
-      this.$target.innerHTML = this.template();
-    }
-  
-    template() {
-      return;
-    }
+  constructor($target) {
+    this.$target = $target;
   }
-  
-  export default Component;
-  
+  setup() {
+    this.render();
+  }
+
+  render() {
+    this.$target.innerHTML = this.template();
+  }
+
+  template() {
+    return;
+  }
+}
+
+export default Component;
