@@ -5,7 +5,6 @@ class CardList extends Component {
     super($target);
     this.cardData = cardData;
   }
-  render() {}
 
   template(card) {
     return `
