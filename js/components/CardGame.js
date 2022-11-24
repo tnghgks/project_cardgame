@@ -51,7 +51,9 @@ class CardGame extends Component {
 
     //이동시 배경 요소를 변경하는 옵션
     this.inGameStyle();
+
     this.paintCardGame(Number(event.target.dataset.level));
+
   }
 
   // 난이도 설정 버튼에 이벤트 리스너 추가
@@ -117,6 +119,7 @@ class CardGame extends Component {
   }
 
   inGameStyle() {
+
     document.querySelector(".tit-game").classList.add("ir");
     document.body.classList.add("inGame");
   }
@@ -126,6 +129,7 @@ class CardGame extends Component {
     this.initialBackground();
     this.addEvent();
     clearInterval(this.timerId);
+    // document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   initialBackground() {
