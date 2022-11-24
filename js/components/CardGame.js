@@ -65,6 +65,7 @@ class CardGame extends Component {
 
     return data.slice(0, totalCardCount / 2);
   }
+
   //카드 그려주기
   async paintCardGame(level) {
     this.$target.innerHTML = "";
@@ -72,18 +73,25 @@ class CardGame extends Component {
     // this.limitTime = level * 10;
     this.limitTime = 200;
 
-    const cardData = await this.getData(this.totalCardCount); // 카드가 반밖에 없음
-
     // 모든 카드 렌더링
+    const cardData = await this.getData(this.totalCardCount);
     const totalCardData = cardData.concat(cardData);
 
-    // 카드 섞기 (sort함수의 리턴값이 음수면 앞으로 양수면 뒤로 갈껍니다)
+    // 랜덤하게 모든 카드를 섞기
     totalCardData.sort(() => Math.random() - 0.5);
+    //카드 Elements 생성해서 Rendor 하기
+    this.paintCard(totalCardData);
 
+    //타이머 실행
+    this.timer(this.limitTime);
+  }
+
+  paintCard(cardData) {
     const $cardList = document.createElement("ul");
     $cardList.classList.add("list-card");
+    $cardList.addEventListener("click", this.flipCard.bind(this));
 
-    totalCardData.forEach((card) => {
+    cardData.forEach((card) => {
       const $li = document.createElement("li");
       const $frontDiv = document.createElement("div");
       const $backDiv = document.createElement("div");
@@ -99,10 +107,6 @@ class CardGame extends Component {
       $cardList.appendChild($li);
     });
     this.$target.appendChild($cardList);
-
-    const $listCard = document.querySelector(".list-card");
-    $listCard.addEventListener("click", this.flipCard.bind(this));
-    this.timer(this.limitTime);
   }
 
   timer(limitTime) {
