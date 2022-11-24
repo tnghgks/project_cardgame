@@ -1,6 +1,7 @@
 // html환경에서는 파일을 임포트해올때 .js를 생략하면 안됩니다.
 import Component from "../core/Component.js";
 import Modal from "./modal.js";
+import CardList from "./CardList.js";
 
 class CardGame extends Component {
   constructor($target) {
@@ -79,33 +80,24 @@ class CardGame extends Component {
 
     // 랜덤하게 모든 카드를 섞기
     totalCardData.sort(() => Math.random() - 0.5);
-    //카드 Elements 생성해서 Rendor 하기
+
+    //카드 그려주기
     this.paintCard(totalCardData);
 
     //타이머 실행
     this.timer(this.limitTime);
   }
 
+  //카드 Elements 생성해서 Rendor 하기
   paintCard(cardData) {
     const $cardList = document.createElement("ul");
     $cardList.classList.add("list-card");
     $cardList.addEventListener("click", this.flipCard.bind(this));
 
-    cardData.forEach((card) => {
-      const $li = document.createElement("li");
-      const $frontDiv = document.createElement("div");
-      const $backDiv = document.createElement("div");
+    //CardList Component 생성
+    const cardList = new CardList($cardList, cardData);
+    cardList.append();
 
-      $frontDiv.classList.add("div-front");
-      $frontDiv.classList.add("div-hidden");
-      $backDiv.classList.add("div-back");
-      $li.classList.add("item-card");
-      $li.appendChild($backDiv);
-      $li.appendChild($frontDiv);
-      $frontDiv.style.backgroundPosition = `${card.position.x}px ${card.position.y}px`;
-
-      $cardList.appendChild($li);
-    });
     this.$target.appendChild($cardList);
   }
 
@@ -151,9 +143,10 @@ class CardGame extends Component {
     }
 
     this.clickCount += 1;
+
     const $cardItem = event.target.parentNode;
     const $back = event.target;
-    const $front = $back.nextSibling;
+    const $front = $back.nextSibling.nextSibling;
 
     $cardItem.classList.add("active");
     // $back.classList.add("div-hidden");
