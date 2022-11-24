@@ -125,16 +125,15 @@ class CardGame extends Component {
   }
   resetStyle() {
     this.setup();
-    this.showMenu();
+    this.initialBackground();
     this.addEvent();
     clearInterval(this.timerId);
     document.body.style.animation = "move 10s linear alternate infinite";
   }
 
-  showMenu() {
+  initialBackground() {
     document.querySelector(".tit-game").classList.remove("ir");
-    document.body.style.backgroundImage = "url('../img/pikachu.png')";
-    document.body.style.backgroundColor = "rgb(9, 255, 0)";
+    document.body.classList.remove("inGame");
   }
 
   flipCard(event) {
