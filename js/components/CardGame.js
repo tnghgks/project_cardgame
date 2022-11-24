@@ -117,11 +117,10 @@ class CardGame extends Component {
   }
 
   inGameStyle() {
-    const title = document.querySelector(".tit-game");
-
-    title.classList.add("ir");
+    document.querySelector(".tit-game").classList.add("ir");
     document.body.classList.add("inGame");
   }
+
   resetStyle() {
     this.setup();
     this.initialBackground();
