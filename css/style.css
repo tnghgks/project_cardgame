@@ -1,8 +1,7 @@
 /* 폰트 */
 @font-face {
   font-family: "Ycomputer-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2")
-    format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -31,7 +30,7 @@ body {
   background-color: rgb(9, 255, 0);
   background-image: url("../img/pikachu.png");
   background-size: 25%;
-  animation: move 10s linear infinite;
+  animation: move 10s linear alternate infinite;
 }
 
 .main-wrapper .arti-level-setting {
@@ -73,48 +72,66 @@ body {
 
 /* 카드 스타일 */
 .list-card {
+  width: 1305px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 10px;
-  /* perspective: 1000px; */
+  justify-content: center;
+  gap: 15px;
+  margin-top: 100px;
 }
 
 .item-card {
   position: relative;
-  /* transition: all 1s;
-  transform-style: preserve-3d; */
+  outline: 4px solid #00479d;
+  transform-style: preserve-3d;
+  border-radius: 10px;
+  background-color: #ffeea2;
+  /* overflow: hidden; */
 }
 
-/* .item-card:active {
+.item-card.active {
+  transition: all 1s;
   transform: rotateY(180deg);
-} */
+}
 
 .div-back {
   background-image: url("../img/card-back.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 150px;
-  height: 224px;
-  /* backface-visibility: hidden; */
+  height: 205px;
+  backface-visibility: hidden;
 }
 
 .div-front {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
   background-image: url("../img/pokemon.png");
+  background-color: #ffeea2;
   width: 100px;
   height: 100px;
   display: block;
-  /* transform: rotateY(180deg); */
-  /* backface-visibility: hidden; */
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
 }
 
 .div-hidden {
   visibility: hidden;
+}
+.modal {
+  width: 500px;
+  height: 700px;
+  background-color: #c0ffee;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
 }
 
 /* footer */
@@ -122,4 +139,13 @@ footer {
   position: absolute;
   left: 50%;
   bottom: 0;
+}
+
+/*****************************************************************/
+
+body.inGame {
+  background: linear-gradient(90deg, rgb(252, 250, 104), rgb(71, 158, 61));
+  background-image: none;
+  background-size: 25%;
+  animation: none;
 }

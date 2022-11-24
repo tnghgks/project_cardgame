@@ -1,6 +1,7 @@
 // html환경에서는 파일을 임포트해올때 .js를 생략하면 안됩니다.
 import Component from "../core/Component.js";
 import Modal from "./modal.js";
+import CardList from "./CardList.js";
 
 class CardGame extends Component {
   constructor($target) {
@@ -48,72 +49,57 @@ class CardGame extends Component {
       return;
     }
 
-    const title = document.querySelector(".tit-game");
+    //이동시 배경 요소를 변경하는 옵션
+    this.inGameStyle();
 
-    title.classList.add("ir");
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "white";
+    this.paintCardGame(Number(event.target.dataset.level));
 
-    this.paintCardGame(event.target.dataset.level);
   }
 
-  showMenu() {
-    document.querySelector(".tit-game").classList.remove("ir");
-    document.body.style.backgroundImage = "url('../img/pikachu.png')";
-    document.body.style.backgroundColor = "rgb(9, 255, 0)";
-  }
-
+  // 난이도 설정 버튼에 이벤트 리스너 추가
   addEvent() {
     const $article = document.querySelector(".arti-level-setting");
 
     $article.addEventListener("click", this.handleLevelBtn.bind(this));
   }
-
+  // json파일에서 카드 데이터 불러오기
   async getData(totalCardCount) {
     const data = await (await fetch("../../json/card.json")).json();
 
     return data.slice(0, totalCardCount / 2);
   }
 
+  //카드 그려주기
   async paintCardGame(level) {
-    level = Number(level);
-
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
     // this.limitTime = level * 10;
     this.limitTime = 2;
 
-    const cardData = await this.getData(this.totalCardCount); // 카드가 반밖에 없음
-
     // 모든 카드 렌더링
+    const cardData = await this.getData(this.totalCardCount);
     const totalCardData = cardData.concat(cardData);
 
-    // 카드 섞기 (sort함수의 리턴값이 음수면 앞으로 양수면 뒤로 갈껍니다)
+    // 랜덤하게 모든 카드를 섞기
     totalCardData.sort(() => Math.random() - 0.5);
 
+    //카드 그려주기
+    this.paintCard(totalCardData);
+
+    //타이머 실행
+    this.timer(this.limitTime);
+  }
+
+  //카드 Elements 생성해서 Rendor 하기
+  paintCard(cardData) {
     const $cardList = document.createElement("ul");
     $cardList.classList.add("list-card");
+    $cardList.addEventListener("click", this.flipCard.bind(this));
 
-    totalCardData.forEach((card) => {
-      const $li = document.createElement("li");
-      const $frontDiv = document.createElement("div");
-      const $backDiv = document.createElement("div");
+    //CardList Component 생성 과 동시에 모든 카드 렌더링 후 cardList 에 추가
+    new CardList($cardList, cardData);
 
-      $frontDiv.classList.add("div-front");
-      $frontDiv.classList.add("div-hidden");
-      $backDiv.classList.add("div-back");
-      $li.classList.add("item-card");
-      $li.appendChild($backDiv);
-      $li.appendChild($frontDiv);
-      $frontDiv.style.backgroundPosition = `${card.position.x}px ${card.position.y}px`;
-
-      $cardList.appendChild($li);
-    });
     this.$target.appendChild($cardList);
-
-    const $listCard = document.querySelector(".list-card");
-    $listCard.addEventListener("click", this.flipCard.bind(this));
-    this.timer(this.limitTime);
   }
 
   timer(limitTime) {
@@ -125,18 +111,30 @@ class CardGame extends Component {
       if (limitTime === 0) {
         // 모달창
         alert("시간종료 !");
-        this.goHome();
+        this.resetStyle();
         this.modal();
       }
-      console.log(limitTime);
+      // console.log(limitTime);
     }, 1000);
   }
 
-  goHome() {
+  inGameStyle() {
+
+    document.querySelector(".tit-game").classList.add("ir");
+    document.body.classList.add("inGame");
+  }
+
+  resetStyle() {
     this.setup();
-    this.showMenu();
+    this.initialBackground();
     this.addEvent();
     clearInterval(this.timerId);
+    // document.body.style.animation = "move 10s linear alternate infinite";
+  }
+
+  initialBackground() {
+    document.querySelector(".tit-game").classList.remove("ir");
+    document.body.classList.remove("inGame");
   }
 
   flipCard(event) {
@@ -146,15 +144,15 @@ class CardGame extends Component {
 
     this.clickCount += 1;
 
+    const $cardItem = event.target.parentNode;
     const $back = event.target;
-    const $front = $back.nextSibling;
+    const $front = $back.nextSibling.nextSibling;
 
-    $back.classList.add("div-hidden");
+    $cardItem.classList.add("active");
+    // $back.classList.add("div-hidden");
     $front.classList.remove("div-hidden");
 
-    const currentCardData = $front.style.backgroundPosition
-      .split(" ")
-      .map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
+    const currentCardData = $front.style.backgroundPosition.split(" ").map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
 
     if (!this.prevCardData) {
       // 첫번째로 클릭 카드의 데이터가 없으면
@@ -162,9 +160,7 @@ class CardGame extends Component {
       this.$prevCardItem = event.target.parentNode; //Card $List 넣어줘야함
     } else {
       //첫번째 카드 데이터가 있으면 아래 로직
-      if (
-        JSON.stringify(this.prevCardData) == JSON.stringify(currentCardData)
-      ) {
+      if (JSON.stringify(this.prevCardData) == JSON.stringify(currentCardData)) {
         setTimeout(() => {
           this.gotCard(event.target.parentNode);
         }, 400);
@@ -172,13 +168,15 @@ class CardGame extends Component {
         this.failScore++;
       }
     }
-
+    //2장 모두 뒤집었을때 초기화 코드
     if (this.clickCount >= 2) {
       const $backDiv = document.querySelectorAll(".div-back");
       $backDiv.forEach((item) => {
         item.style.pointerEvents = "none";
       });
       setTimeout(() => {
+        this.$prevCardItem.classList.remove("active");
+        $cardItem.classList.remove("active");
         this.replaceCard();
         this.prevCardData = "";
         this.$prevCardItem = "";
@@ -187,7 +185,6 @@ class CardGame extends Component {
 
       return;
     }
-
     // 카드 카운트가 2가 되면 모든 카드 다시 뒤집기
   }
 
@@ -213,11 +210,6 @@ class CardGame extends Component {
   }
 
   modal() {
-    //1. 다 맞췄을때 모달창 뜨도록
-    //2. 모달 디자인
-    //3. 스코어 로컬스토리에 넣고 빼기
-    //4. 메인 스코어보드 흘러가게 js
-
     const score = {}; //임시
     const winLose = false; //임시
 

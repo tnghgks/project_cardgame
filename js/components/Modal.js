@@ -2,7 +2,7 @@ import Component from "../core/Component.js";
 
 class Modal extends Component {
   constructor(score, winLose, restart, goHome) {
-    super(document.querySelector(".modal"));
+    super(document.querySelector(".art-modal"));
     this.score = score;
     this.winLose = winLose;
     this.restart = restart;
