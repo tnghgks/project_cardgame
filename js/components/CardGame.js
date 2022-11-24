@@ -94,9 +94,8 @@ class CardGame extends Component {
     $cardList.classList.add("list-card");
     $cardList.addEventListener("click", this.flipCard.bind(this));
 
-    //CardList Component 생성
-    const cardList = new CardList($cardList, cardData);
-    cardList.append();
+    //CardList Component 생성 과 동시에 모든 카드 렌더링 후 cardList 에 추가
+    new CardList($cardList, cardData);
 
     this.$target.appendChild($cardList);
   }

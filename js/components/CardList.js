@@ -4,6 +4,7 @@ class CardList extends Component {
   constructor($target, cardData) {
     super($target);
     this.cardData = cardData;
+    this.setup();
   }
 
   template(card) {
@@ -13,7 +14,7 @@ class CardList extends Component {
       <div class="div-front div-hidden" style="background-position: ${card.position.x}px ${card.position.y}px;"></div>
     </li>`;
   }
-  append() {
+  render() {
     this.cardData.forEach((card) => {
       this.$target.innerHTML += this.template(card);
     });
