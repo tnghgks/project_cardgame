@@ -127,7 +127,6 @@ class CardGame extends Component {
     this.initialBackground();
     this.addEvent();
     clearInterval(this.timerId);
-    document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   initialBackground() {
