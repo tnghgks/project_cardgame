@@ -50,35 +50,27 @@ class CardGame extends Component {
 
     //이동시 배경 요소를 변경하는 옵션
     this.inGameStyle();
-
-    this.paintCardGame(event.target.dataset.level);
+    this.paintCardGame(Number(event.target.dataset.level));
   }
 
-  showMenu() {
-    document.querySelector(".tit-game").classList.remove("ir");
-    document.body.style.backgroundImage = "url('../img/pikachu.png')";
-    document.body.style.backgroundColor = "rgb(9, 255, 0)";
-  }
-
+  // 난이도 설정 버튼에 이벤트 리스너 추가
   addEvent() {
     const $article = document.querySelector(".arti-level-setting");
 
     $article.addEventListener("click", this.handleLevelBtn.bind(this));
   }
-
+  // json파일에서 카드 데이터 불러오기
   async getData(totalCardCount) {
     const data = await (await fetch("../../json/card.json")).json();
 
     return data.slice(0, totalCardCount / 2);
   }
-
+  //카드 그려주기
   async paintCardGame(level) {
-    level = Number(level);
-
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
     // this.limitTime = level * 10;
-    this.limitTime = 2;
+    this.limitTime = 200;
 
     const cardData = await this.getData(this.totalCardCount); // 카드가 반밖에 없음
 
@@ -143,6 +135,12 @@ class CardGame extends Component {
     // document.body.style.animation = "move 10s linear alternate infinite";
   }
 
+  showMenu() {
+    document.querySelector(".tit-game").classList.remove("ir");
+    document.body.style.backgroundImage = "url('../img/pikachu.png')";
+    document.body.style.backgroundColor = "rgb(9, 255, 0)";
+  }
+
   flipCard(event) {
     if (!(event.target.className === "div-back")) {
       return;
@@ -190,7 +188,6 @@ class CardGame extends Component {
 
       return;
     }
-
     // 카드 카운트가 2가 되면 모든 카드 다시 뒤집기
   }
 
