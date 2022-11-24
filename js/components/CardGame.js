@@ -48,11 +48,8 @@ class CardGame extends Component {
       return;
     }
 
-    const title = document.querySelector(".tit-game");
-
-    title.classList.add("ir");
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "white";
+    //이동시 배경 요소를 변경하는 옵션
+    this.inGameStyle();
 
     this.paintCardGame(event.target.dataset.level);
   }
@@ -125,18 +122,25 @@ class CardGame extends Component {
       if (limitTime === 0) {
         // 모달창
         alert("시간종료 !");
-        this.goHome();
+        this.resetStyle();
         this.modal();
       }
-      console.log(limitTime);
+      // console.log(limitTime);
     }, 1000);
   }
 
-  goHome() {
+  inGameStyle() {
+    const title = document.querySelector(".tit-game");
+
+    title.classList.add("ir");
+    document.body.classList.add("inGame");
+  }
+  resetStyle() {
     this.setup();
     this.showMenu();
     this.addEvent();
     clearInterval(this.timerId);
+    // document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   flipCard(event) {
@@ -145,16 +149,15 @@ class CardGame extends Component {
     }
 
     this.clickCount += 1;
-
+    const $cardItem = event.target.parentNode;
     const $back = event.target;
     const $front = $back.nextSibling;
 
-    $back.classList.add("div-hidden");
+    $cardItem.classList.add("active");
+    // $back.classList.add("div-hidden");
     $front.classList.remove("div-hidden");
 
-    const currentCardData = $front.style.backgroundPosition
-      .split(" ")
-      .map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
+    const currentCardData = $front.style.backgroundPosition.split(" ").map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
 
     if (!this.prevCardData) {
       // 첫번째로 클릭 카드의 데이터가 없으면
@@ -162,9 +165,7 @@ class CardGame extends Component {
       this.$prevCardItem = event.target.parentNode; //Card $List 넣어줘야함
     } else {
       //첫번째 카드 데이터가 있으면 아래 로직
-      if (
-        JSON.stringify(this.prevCardData) == JSON.stringify(currentCardData)
-      ) {
+      if (JSON.stringify(this.prevCardData) == JSON.stringify(currentCardData)) {
         setTimeout(() => {
           this.gotCard(event.target.parentNode);
         }, 400);
@@ -172,13 +173,15 @@ class CardGame extends Component {
         this.failScore++;
       }
     }
-
+    //2장 모두 뒤집었을때 초기화 코드
     if (this.clickCount >= 2) {
       const $backDiv = document.querySelectorAll(".div-back");
       $backDiv.forEach((item) => {
         item.style.pointerEvents = "none";
       });
       setTimeout(() => {
+        this.$prevCardItem.classList.remove("active");
+        $cardItem.classList.remove("active");
         this.replaceCard();
         this.prevCardData = "";
         this.$prevCardItem = "";
@@ -213,11 +216,6 @@ class CardGame extends Component {
   }
 
   modal() {
-    //1. 다 맞췄을때 모달창 뜨도록
-    //2. 모달 디자인
-    //3. 스코어 로컬스토리에 넣고 빼기
-    //4. 메인 스코어보드 흘러가게 js
-
     const score = {}; //임시
     const winLose = false; //임시
 
