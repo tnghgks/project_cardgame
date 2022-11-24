@@ -72,7 +72,7 @@ class CardGame extends Component {
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
     // this.limitTime = level * 10;
-    this.limitTime = 200;
+    this.limitTime = 2;
 
     // 모든 카드 렌더링
     const cardData = await this.getData(this.totalCardCount);
@@ -128,7 +128,7 @@ class CardGame extends Component {
     this.showMenu();
     this.addEvent();
     clearInterval(this.timerId);
-    // document.body.style.animation = "move 10s linear alternate infinite";
+    document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   showMenu() {
