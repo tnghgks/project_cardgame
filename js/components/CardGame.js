@@ -16,6 +16,8 @@ class CardGame extends Component {
 
   template() {
     return ` 
+    <h1 class="tit-game">피카츄 카드 게임</h1>
+    <main class="main-wrapper">
         <article class="arti-level-setting">
           <h2 class="tit-diff-board ir">난이도 설정</h2>
           <button class="btn-easy" type="button" data-level="4">4 X 4</button>
@@ -41,7 +43,11 @@ class CardGame extends Component {
           <li>맞은 횟수 : <span class="txt-success-count">15</span></li>
           <li>틀린 횟수 : <span class="txt-wrong-count">155</span></li>
         </ul>
-      </article>`;
+      </article>
+    </main>
+    <footer>저작권</footer>
+    <article class="art-modal"></article>
+    `;
   }
 
   handleLevelBtn(event) {
