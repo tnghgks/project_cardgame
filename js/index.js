@@ -4,4 +4,3 @@ const $root = document.querySelector(".root");
 const cardgame = new CardGame($root);
 
 cardgame.setup();
-cardgame.addEvent();
