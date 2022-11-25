@@ -4,6 +4,7 @@ class Component {
   }
   setup() {
     this.render();
+    this.addEvent();
   }
 
   render() {
@@ -13,6 +14,7 @@ class Component {
   template() {
     return;
   }
+  addEvent() {}
 }
 
 export default Component;

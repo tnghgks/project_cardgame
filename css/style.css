@@ -31,6 +31,7 @@ body {
   background-image: url("../img/pikachu.png");
   background-size: 25%;
   animation: move 10s linear alternate infinite;
+  overflow: hidden;
 }
 
 .main-wrapper .arti-level-setting {
@@ -62,12 +63,19 @@ body {
   border: 5px inset white;
 }
 
-.main-wrapper .list-score-board-content {
+.main-wrapper marquee {
   width: 100%;
+  position: absolute;
+  bottom: 80px;
   display: flex;
+  font-family: "Ycomputer-Regular";
   justify-content: center;
   align-items: center;
   margin-top: 130px;
+  white-space: nowrap;
+}
+marquee > strong {
+  font-weight: bold;
 }
 
 /* 카드 스타일 */
