@@ -1,6 +1,6 @@
 // html환경에서는 파일을 임포트해올때 .js를 생략하면 안됩니다.
 import Component from "../core/Component.js";
-import Modal from "./modal.js";
+import Modal from "./Modal.js";
 import CardList from "./CardList.js";
 
 class CardGame extends Component {
