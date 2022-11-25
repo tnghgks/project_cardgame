@@ -53,9 +53,7 @@ class CardGame extends Component {
     this.inGameStyle();
 
     this.paintCardGame(Number(event.target.dataset.level));
-
   }
-
   // 난이도 설정 버튼에 이벤트 리스너 추가
   addEvent() {
     const $article = document.querySelector(".arti-level-setting");
@@ -119,7 +117,6 @@ class CardGame extends Component {
   }
 
   inGameStyle() {
-
     document.querySelector(".tit-game").classList.add("ir");
     document.body.classList.add("inGame");
   }
