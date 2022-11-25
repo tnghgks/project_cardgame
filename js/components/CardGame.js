@@ -27,25 +27,22 @@ class CardGame extends Component {
 
         <article class="arti-score-board">
         <h2 class="tit-score-board ir">스코어 보드</h2>
-        <ul class="list-score-board-content">
-          <li>
-            종합점수
-            <p>총 승리 :</p>
-            <p>총 패배 :</p>
-          </li>
-          <li>
-            난이도별 점수
-            <p>어려움 (8*8) : 64s</p>
-            <p>중간 (6*6) : 54s</p>
-            <p>쉬움 (4*4) : 32s</p>
-          </li>
-          <li>뒤집은 총 횟수 : <span class="txt-total-count">1565</span></li>
-          <li>맞은 횟수 : <span class="txt-success-count">15</span></li>
-          <li>틀린 횟수 : <span class="txt-wrong-count">155</span></li>
-        </ul>
+        <marquee>
+        <strong>종합점수</strong>
+        총 승리 : 3
+        총 패배 : 1
+        <strong>난이도별 클리어 타임</strong>
+        어려움 (8*8) : 64s
+        중간 (6*6) : 54s
+        쉬움 (4*4) : 32s
+        <strong>이전 기록</strong>
+        뒤집은 총 횟수 : 1565
+        맞은 횟수 :15
+        틀린 횟수 :155
+        </marquee>
       </article>
     </main>
-    <footer>저작권</footer>
+    <footer></footer>
     <article class="art-modal"></article>
     `;
   }
@@ -109,16 +106,14 @@ class CardGame extends Component {
   timer(limitTime) {
     // 시간을 흘러가게 하면서 시간이 종료되면 모달창을 띄워준 뒤 초기화면
     // 게임을 클리어하면 타이머함수를 종료시킨뒤에 모달창을 띄우고 시간을 변수에 저장
-    // constructor에 저장해주는 이유 => 다른 곳에서도 타이머 함수를 종료시켜줘야 할 상황이 있을수도 있음.
+    // Class 프로퍼티에 저장해주는 이유 => 다른 곳에서도 타이머 함수를 종료시켜줘야 할 상황이 있을수도 있음.
     this.timerId = setInterval(() => {
       limitTime--;
       if (limitTime === 0) {
-        // 모달창
         alert("시간종료 !");
         this.resetStyle();
         this.modal();
       }
-      // console.log(limitTime);
     }, 1000);
   }
 
@@ -130,9 +125,7 @@ class CardGame extends Component {
   resetStyle() {
     this.setup();
     this.initialBackground();
-    this.addEvent();
     clearInterval(this.timerId);
-    // document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   initialBackground() {
@@ -152,7 +145,6 @@ class CardGame extends Component {
     const $front = $back.nextSibling.nextSibling;
 
     $cardItem.classList.add("active");
-    // $back.classList.add("div-hidden");
     $front.classList.remove("div-hidden");
 
     const currentCardData = $front.style.backgroundPosition.split(" ").map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
