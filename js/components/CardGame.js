@@ -51,6 +51,7 @@ class CardGame extends Component {
 
     //이동시 배경 요소를 변경하는 옵션
     this.inGameStyle();
+
     this.paintCardGame(Number(event.target.dataset.level));
   }
 
@@ -126,6 +127,7 @@ class CardGame extends Component {
     this.initialBackground();
     this.addEvent();
     clearInterval(this.timerId);
+    // document.body.style.animation = "move 10s linear alternate infinite";
   }
 
   initialBackground() {
