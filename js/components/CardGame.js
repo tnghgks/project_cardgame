@@ -65,7 +65,7 @@ class CardGame extends Component {
   }
   // json파일에서 카드 데이터 불러오기
   async getData(totalCardCount) {
-    const data = await (await fetch(`/json/card.json`)).json();
+    const data = await (await fetch(`json/card.json`)).json();
 
     return data.slice(0, totalCardCount / 2);
   }
