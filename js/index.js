@@ -1,7 +1,6 @@
 import CardGame from "./components/CardGame.js";
 
-const $main = document.querySelector(".main-wrapper");
-const cardgame = new CardGame($main);
+const $root = document.querySelector(".root");
+const cardgame = new CardGame($root);
 
 cardgame.setup();
-cardgame.addEvent();
