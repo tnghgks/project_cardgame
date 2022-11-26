@@ -1,17 +1,17 @@
 // html환경에서는 파일을 임포트해올때 .js를 생략하면 안됩니다.
-import Component from "../core/Component.js";
-import Modal from "./Modal.js";
-import CardList from "./CardList.js";
+import Component from '../core/Component.js';
+import Modal from './Modal.js';
+import CardList from './CardList.js';
 
 class CardGame extends Component {
     constructor($target) {
         super($target);
         this.clickCount = 0;
-        this.$prevCardItem = "";
-        this.prevCardData = "";
+        this.$prevCardItem = '';
+        this.prevCardData = '';
         this.hitScore = 0;
         this.failScore = 0;
-        this.timerId = "";
+        this.timerId = '';
     }
 
     template() {
@@ -48,7 +48,7 @@ class CardGame extends Component {
     }
 
     handleLevelBtn(event) {
-        if (!(event.target.tagName === "BUTTON")) {
+        if (!(event.target.tagName === 'BUTTON')) {
             return;
         }
 
@@ -59,9 +59,9 @@ class CardGame extends Component {
     }
     // 난이도 설정 버튼에 이벤트 리스너 추가
     addEvent() {
-        const $article = document.querySelector(".arti-level-setting");
+        const $article = document.querySelector('.arti-level-setting');
 
-        $article.addEventListener("click", this.handleLevelBtn.bind(this));
+        $article.addEventListener('click', this.handleLevelBtn.bind(this));
     }
     // json파일에서 카드 데이터 불러오기
     async getData(totalCardCount) {
@@ -72,10 +72,10 @@ class CardGame extends Component {
 
     //카드 그려주기
     async paintCardGame(level) {
-        this.$target.innerHTML = "";
+        this.$target.innerHTML = '';
         this.totalCardCount = level * level;
         // this.limitTime = level * 10;
-        this.limitTime = 1;
+        this.limitTime = 2;
 
         // 모든 카드 렌더링
         const cardData = await this.getData(this.totalCardCount);
@@ -93,9 +93,9 @@ class CardGame extends Component {
 
     //카드 Elements 생성해서 Rendor 하기
     paintCard(cardData) {
-        const $cardList = document.createElement("ul");
-        $cardList.classList.add("list-card");
-        $cardList.addEventListener("click", this.flipCard.bind(this));
+        const $cardList = document.createElement('ul');
+        $cardList.classList.add('list-card');
+        $cardList.addEventListener('click', this.flipCard.bind(this));
 
         //CardList Component 생성 과 동시에 모든 카드 렌더링 후 cardList 에 추가
         new CardList($cardList, cardData);
@@ -118,8 +118,8 @@ class CardGame extends Component {
     }
 
     inGameStyle() {
-        document.querySelector(".tit-game").classList.add("ir");
-        document.body.classList.add("inGame");
+        document.querySelector('.tit-game').classList.add('ir');
+        document.body.classList.add('inGame');
     }
 
     resetStyle() {
@@ -129,12 +129,12 @@ class CardGame extends Component {
     }
 
     initialBackground() {
-        document.querySelector(".tit-game").classList.remove("ir");
-        document.body.classList.remove("inGame");
+        document.querySelector('.tit-game').classList.remove('ir');
+        document.body.classList.remove('inGame');
     }
 
     flipCard(event) {
-        if (!(event.target.className === "div-back")) {
+        if (!(event.target.className === 'div-back')) {
             return;
         }
 
@@ -144,11 +144,11 @@ class CardGame extends Component {
         const $back = event.target;
         const $front = $back.nextSibling.nextSibling;
 
-        $cardItem.classList.add("active");
-        $front.classList.remove("div-hidden");
+        $cardItem.classList.add('active');
+        $front.classList.remove('div-hidden');
 
         const currentCardData = $front.style.backgroundPosition
-            .split(" ")
+            .split(' ')
             .map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
 
         if (!this.prevCardData) {
@@ -170,16 +170,16 @@ class CardGame extends Component {
         }
         //2장 모두 뒤집었을때 초기화 코드
         if (this.clickCount >= 2) {
-            const $backDiv = document.querySelectorAll(".div-back");
+            const $backDiv = document.querySelectorAll('.div-back');
             $backDiv.forEach((item) => {
-                item.style.pointerEvents = "none";
+                item.style.pointerEvents = 'none';
             });
             setTimeout(() => {
-                this.$prevCardItem.classList.remove("active");
-                $cardItem.classList.remove("active");
+                this.$prevCardItem.classList.remove('active');
+                $cardItem.classList.remove('active');
                 this.replaceCard();
-                this.prevCardData = "";
-                this.$prevCardItem = "";
+                this.prevCardData = '';
+                this.$prevCardItem = '';
             }, 800);
             this.clickCount = 0;
 
@@ -190,22 +190,22 @@ class CardGame extends Component {
 
     gotCard(colletCard) {
         // 비교해서 맞는거 할라면 data-x , data-y 비교해서 같으면 Got
-        this.$prevCardItem.classList.add("div-hidden");
-        colletCard.classList.add("div-hidden");
+        this.$prevCardItem.classList.add('div-hidden');
+        colletCard.classList.add('div-hidden');
 
         this.hitScore++;
     }
 
     // 카드 뒤집기
     replaceCard() {
-        const $backDiv = document.querySelectorAll(".div-back");
-        const $frontDiv = document.querySelectorAll(".div-front");
+        const $backDiv = document.querySelectorAll('.div-back');
+        const $frontDiv = document.querySelectorAll('.div-front');
         $frontDiv.forEach((item) => {
-            item.classList.add("div-hidden");
+            item.classList.add('div-hidden');
         });
         $backDiv.forEach((item) => {
-            item.classList.remove("div-hidden");
-            item.style.pointerEvents = "auto";
+            item.classList.remove('div-hidden');
+            item.style.pointerEvents = 'auto';
         });
     }
 
