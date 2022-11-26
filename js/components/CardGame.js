@@ -213,7 +213,7 @@ class CardGame extends Component {
         const score = {}; //임시
         const winLose = false; //임시
 
-        new Modal(score, winLose, this.restart, this.goHome);
+        new Modal(score, winLose, this.resetStyle, this.restart);
     }
 
     restart() {}
