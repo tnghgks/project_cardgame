@@ -1,17 +1,21 @@
 import Component from "../core/Component.js";
 
 class Modal extends Component {
-    constructor(score, winLose, resetStyle, restart) {
-        super(document.querySelector(".art-modal"));
-        this.score = score;
-        this.winLose = winLose;
-        this.resetStyle = resetStyle;
-        this.restart = restart;
-        this.setup();
-    }
+  constructor(score, winLose, resetStyle, restart) {
+    super(document.querySelector(".root"));
+    this.score = score;
+    this.winLose = winLose;
+    this.resetStyle = resetStyle;
+    this.restart = restart;
+    this.setup();
+  }
 
-    template() {
-        return `
+  render() {
+    this.$target.innerHTML += this.template();
+  }
+
+  template() {
+    return `
         <article class="modal">
         <h2 class="tit-modal">게임종료</h2>
             <p>
@@ -34,22 +38,22 @@ class Modal extends Component {
             <button class="btn-return btn-style">재시도</button>
         </article>
         `;
-    }
-    // render() {
-    //     this.document.querySelector(".art-modal").innerHTML += this.template();
-    // }
+  }
+  // render() {
+  //     this.document.querySelector(".art-modal").innerHTML += this.template();
+  // }
 
-    addEvent() {
-        const btnGoMain = document.querySelector(".btn-go-main");
-        const btnReturn = document.querySelector(".btn-return");
+  addEvent() {
+    const btnGoMain = document.querySelector(".btn-go-main");
+    const btnReturn = document.querySelector(".btn-return");
 
-        btnGoMain.addEventListener("click", (event) => {
-            console.log("메인으로");
-        });
-        btnReturn.addEventListener("click", (event) => {
-            console.log("재시도");
-        });
-    }
+    btnGoMain.addEventListener("click", (event) => {
+      console.log("메인으로");
+    });
+    btnReturn.addEventListener("click", (event) => {
+      console.log("재시도");
+    });
+  }
 }
 
 export default Modal;
