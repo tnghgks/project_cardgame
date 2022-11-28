@@ -216,6 +216,17 @@ class CardGame extends Component {
             this.resetStyle,
             this.restart
         );
+
+        const btnGoMain = document.querySelector(".btn-go-main");
+        const btnReturn = document.querySelector(".btn-return");
+
+        btnGoMain.addEventListener("click", (event) => {
+            console.log("메인으로");
+            this.resetStyle();
+        });
+        btnReturn.addEventListener("click", (event) => {
+            console.log("재시도");
+        });
     }
 
     restart() {}

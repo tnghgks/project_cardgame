@@ -42,15 +42,14 @@ class Modal extends Component {
     }
 
     addEvent() {
-        const btnGoMain = document.querySelector(".btn-go-main");
-        const btnReturn = document.querySelector(".btn-return");
-
-        btnGoMain.addEventListener("click", (event) => {
-            console.log("메인으로");
-        });
-        btnReturn.addEventListener("click", (event) => {
-            console.log("재시도");
-        });
+        // const btnGoMain = document.querySelector(".btn-go-main");
+        // const btnReturn = document.querySelector(".btn-return");
+        // btnGoMain.addEventListener("click", (event) => {
+        //     console.log("메인으로");
+        // });
+        // btnReturn.addEventListener("click", (event) => {
+        //     console.log("재시도");
+        // });
     }
 }
 
