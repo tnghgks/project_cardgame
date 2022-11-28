@@ -37,8 +37,8 @@ class CardGame extends Component {
         쉬움 (4*4) : 32s
         <strong>이전 기록</strong>
         뒤집은 총 횟수 : 1565
-        맞은 횟수 :15
-        틀린 횟수 :155
+        맞은 횟수 : 15
+        틀린 횟수 : 155
         </marquee>
       </article>
     </main>
@@ -184,7 +184,6 @@ class CardGame extends Component {
 
             return;
         }
-        // 카드 카운트가 2가 되면 모든 카드 다시 뒤집기
     }
 
     gotCard(colletCard) {
@@ -222,6 +221,8 @@ class CardGame extends Component {
 
         btnGoMain.addEventListener("click", (event) => {
             console.log("메인으로");
+            this.hitScore = 0;
+            this.failScore = 0;
             this.resetStyle();
         });
         btnReturn.addEventListener("click", (event) => {
