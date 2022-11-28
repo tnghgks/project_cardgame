@@ -178,7 +178,7 @@ footer {
 
 body.inGame {
     background: linear-gradient(90deg, rgb(252, 250, 104), rgb(71, 158, 61));
-    background-image: url(/img/cardBack.jpg);
+    background-image: url("../img/cardBack.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     animation: none;
