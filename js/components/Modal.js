@@ -1,13 +1,11 @@
 import Component from "../core/Component.js";
 
 class Modal extends Component {
-    constructor(limitTime, hitScore, failScore, resetStyle, restart) {
+    constructor(limitTime, hitScore, failScore) {
         super(document.querySelector(".root"));
         this.limitTime = limitTime;
         this.hitScore = hitScore;
         this.failScore = failScore;
-        this.resetStyle = resetStyle;
-        this.restart = restart;
         this.setup();
     }
 
