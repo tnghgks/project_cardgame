@@ -29,9 +29,9 @@ class CardGame extends Component {
     console.log(scoreData);
     this.victory = scoreData.victory;
     this.defeat = scoreData.defeat;
-    this.totalFlipCount = Number(scoreData.hitScore) + scoreData.failScore;
+    this.totalFlipCount = scoreData.totalFlipCount;
     this.totalHitScore = scoreData.totalHitScore;
-    this.totalFailScore = scoreData.totalFailScore;
+    this.totalFailScore = scoreData.totalHitScore;
   }
 
   template() {
