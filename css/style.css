@@ -1,86 +1,88 @@
 /* 폰트 */
 @font-face {
-  font-family: "Ycomputer-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Ycomputer-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2')
+        format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* 애니메이션 */
 @keyframes move {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -1000px -1000px;
-  }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -1000px -1000px;
+    }
 }
 
 /* 버튼 스타일 */
 .btn-style {
-  font-family: "Ycomputer-Regular";
-  font-weight: bold;
-  border: 5px outset white;
-  background-color: lightgray;
-  padding: 15px 50px;
+    opacity: 0.9;
+    font-family: 'Ycomputer-Regular';
+    font-weight: bold;
+    border: 5px outset white;
+    background-color: lightgray;
+    padding: 15px 50px;
 }
 
 .btn-style:active {
-  border: 5px inset white;
+    border: 5px inset white;
 }
 
 /* 레이아웃 */
 .ir {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
 }
 
 body {
-  background-color: rgb(9, 255, 0);
-  background-image: url("../img/pikachu.png");
-  background-size: 25%;
-  animation: move 10s linear alternate infinite;
-  overflow: hidden;
+    background-color: rgb(9, 255, 0);
+    background-image: url('../img/pikachu.png');
+    background-size: 25%;
+    animation: move 10s linear alternate infinite;
+    overflow: hidden;
 }
 .root {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .main-wrapper .arti-level-setting {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 /* 메인 화면 */
 .tit-game {
-  font-family: "Ycomputer-Regular";
-  font-size: 5rem;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: -4px 0 red, 0 4px green, 4px 0 blue, 10px -4px purple;
-  color: yellow;
-  margin: 120px 0px;
+    font-family: 'Ycomputer-Regular';
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -4px 0 red, 0 4px green, 4px 0 blue, 10px -4px purple;
+    color: yellow;
+    margin: 120px 0px;
 }
 
 .main-wrapper marquee {
-  width: 100%;
-  position: absolute;
-  bottom: 80px;
-  display: flex;
-  font-family: "Ycomputer-Regular";
-  justify-content: center;
-  align-items: center;
-  margin-top: 130px;
-  white-space: nowrap;
+    width: 100%;
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    font-family: 'Ycomputer-Regular';
+    justify-content: center;
+    align-items: center;
+    margin-top: 130px;
+    white-space: nowrap;
 }
 marquee > strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* 카드 스타일 */
@@ -96,165 +98,165 @@ marquee > strong {
 } */
 
 .item-card {
-  position: relative;
-  outline: 4px solid #00479d;
-  transform-style: preserve-3d;
-  border-radius: 10px;
-  background-color: #ffeea2;
+    position: relative;
+    outline: 4px solid #00479d;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    background-color: #ffeea2;
 }
 
 .item-card.active {
-  transition: all 1s;
-  transform: rotateY(180deg);
+    transition: all 1s;
+    transform: rotateY(180deg);
 }
 
 .div-back {
-  background-image: url("../img/card-back.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 150px;
-  height: 205px;
-  backface-visibility: hidden;
+    background-image: url('../img/card-back.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 205px;
+    backface-visibility: hidden;
 }
 
 .div-front {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0 auto;
-  background-image: url("../img/pokemon.png");
-  background-color: #ffeea2;
-  width: 100px;
-  height: 100px;
-  display: block;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background-image: url('../img/pokemon.png');
+    background-color: #ffeea2;
+    width: 100px;
+    height: 100px;
+    display: block;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
 }
 
 .div-hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 /* footer */
 footer {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
 }
 
 /* 모달 */
 .modal {
-  font-family: "Ycomputer-Regular";
-  width: 400px;
-  height: 600px;
-  background-color: rgb(255, 234, 0);
-  border: 6px solid blue;
-  border-radius: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+    font-family: 'Ycomputer-Regular';
+    width: 400px;
+    height: 600px;
+    background-color: rgb(255, 234, 0);
+    border: 6px solid blue;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 .modal::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: url("../img/pokemonLogo.png") no-repeat;
-  background-size: contain;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.1;
-  z-index: -1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: url('../img/pokemonLogo.png') no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+    z-index: -1;
 }
 
 .modal .tit-modal {
-  margin: 80px 0;
-  font-size: 40px;
-  font-weight: bold;
-  color: rgb(65, 65, 252);
-  text-shadow: -3px 0px white, 0px 3px black, 4px 0px black, 0px -3px white;
+    margin: 80px 0;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(65, 65, 252);
+    text-shadow: -3px 0px white, 0px 3px black, 4px 0px black, 0px -3px white;
 }
 
 .modal p {
-  margin-bottom: 30px;
-  font-size: 20px;
-  font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .modal .btn-style {
-  padding: 10px 15px;
-  margin: 60px 5px 60px;
+    padding: 10px 15px;
+    margin: 60px 5px 60px;
 }
 
 /*****************************************************************/
 
 body.inGame {
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(90deg, rgb(252, 250, 104), rgb(71, 158, 61));
-  background-image: url("../img/cardBack.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation: none;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgb(252, 250, 104), rgb(71, 158, 61));
+    background-image: url('../img/cardBack.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: none;
 }
 /*  easy */
 .list-card.easy {
-  max-width: 646px;
-  margin: 1% auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
+    max-width: 646px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
 }
 
 /*  normal */
 
 .list-card.normal {
-  max-width: 1470px;
-  margin: 1% auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
+    max-width: 1470px;
+    margin: 1% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
 }
 
 /*  hard */
 .list-card.hard {
-  max-width: 1328px;
-  margin: 10px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+    max-width: 1328px;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 .hard .div-back {
-  background-image: url("../img/card-back.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 107px;
-  height: 146px;
-  backface-visibility: hidden;
+    background-image: url('../img/card-back.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 107px;
+    height: 146px;
+    backface-visibility: hidden;
 }
 
 .hard .div-front {
-  position: absolute;
-  top: 15%;
-  left: 0;
-  bottom: 0;
-  margin: 0 auto;
-  background-image: url("../img/pokemon.png");
-  background-color: #ffeea2;
-  width: 100px;
-  height: 100px;
-  display: block;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background-image: url('../img/pokemon.png');
+    background-color: #ffeea2;
+    width: 100px;
+    height: 100px;
+    display: block;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
 }
