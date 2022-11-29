@@ -5,14 +5,33 @@ import CardList from './CardList.js';
 
 class CardGame extends Component {
     constructor($target) {
+        // 점수 관련된 친구들 객체로 변환
         super($target);
         this.clickCount = 0;
-        this.$prevCardItem = '';
-        this.prevCardData = '';
         this.hitScore = 0;
         this.failScore = 0;
-        this.timerId = '';
+        this.victory = 0;
+        this.defeat = 0;
+        this.totalFlipCount = 0;
+        this.totalHitScore = 0;
+        this.totalFailScore = 0;
         this.level = 0;
+        this.$prevCardItem = '';
+        this.prevCardData = '';
+        this.timerId = '';
+        this.getScoreInLocal();
+    }
+
+    getScoreInLocal() {
+        const scoreData = JSON.parse(localStorage.getItem('scoreBoard'));
+
+        if (!scoreData) return;
+        console.log(scoreData);
+        this.victory = scoreData.victory;
+        this.defeat = scoreData.defeat;
+        this.totalFlipCount = scoreData.hitScore + scoreData.failScore;
+        this.totalHitScore = scoreData.totalHitScore;
+        this.totalFailScore = scoreData.totalFailScore;
     }
 
     template() {
@@ -30,16 +49,16 @@ class CardGame extends Component {
         <h2 class="tit-score-board ir">스코어 보드</h2>
         <marquee>
         <strong>종합점수</strong>
-        총 승리 : 3
-        총 패배 : 1
+        총 승리 : ${this.victory}
+        총 패배 : ${this.defeat}
         <strong>난이도별 클리어 타임</strong>
         어려움 (8*8) : 64s
         중간 (6*6) : 54s
         쉬움 (4*4) : 32s
         <strong>이전 기록</strong>
-        뒤집은 총 횟수 : 1565
-        맞은 횟수 : 15
-        틀린 횟수 : 155
+        뒤집은 총 횟수 : ${this.totalFlipCount}
+        맞은 횟수 : ${this.totalHitScore}
+        틀린 횟수 : ${this.totalFailScore}
         </marquee>
       </article>
     </main>
@@ -114,6 +133,8 @@ class CardGame extends Component {
                 //alert("시간종료 !");
                 console.log(this.limitTime);
                 this.modal();
+                this.defeat++;
+                this.saveScoreInLocal();
             }
         }, 1000);
     }
@@ -167,6 +188,7 @@ class CardGame extends Component {
                 }, 400);
             } else {
                 this.failScore++;
+                this.totalFailScore++;
             }
         }
         //2장 모두 뒤집었을때 초기화 코드
@@ -195,6 +217,9 @@ class CardGame extends Component {
         colletCard.classList.add('div-hidden');
 
         this.hitScore++;
+        this.totalHitScore++;
+
+        this.checkHitScore(this.hitScore);
     }
 
     // 카드 뒤집기
@@ -238,7 +263,30 @@ class CardGame extends Component {
             this.resetScore();
         });
     }
+    //4레벨 -> 8점, 6레벨 -> 18점, 8레벨 -> 32점 level**2 / 2
+    checkHitScore(score) {
+        if (score === this.level ** 2 / 2) {
+            setTimeout(() => {
+                this.modal();
+                this.victory++;
+                saveScoreInLocal();
+            }, 1000);
+        }
+    }
 
-    restart() {}
+    saveScoreInLocal() {
+        localStorage.setItem(
+            'scoreBoard',
+            JSON.stringify({
+                victory: this.victory,
+                defeat: this.defeat,
+                totalFlipCount: this.hitScore + this.failScore,
+                totalHitScore: this.totalHitScore,
+                totalFailScore: this.totalFailScore,
+            })
+        );
+    }
+
+    // 총승리, 총패배, 난이도별 클리어타임, 뒤집은 총 횟수, 맞은 횟수 , 틀린 횟수
 }
 export default CardGame;
