@@ -169,7 +169,7 @@ class CardGame extends Component {
     }
     if (this.$prevCardItem) {
       const prev = this.$prevCardItem.querySelector(".div-back");
-      if (prev == event.target) {
+      if (prev === event.target) {
         return;
       }
     }
