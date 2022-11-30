@@ -196,7 +196,25 @@ footer {
 }
 
 /*****************************************************************/
+/* 프로그레스바 */
+.bar-style {
+    width: 100vw;
+    margin-bottom: 20px;
+}
+.bar-style {
+    appearance: none;
+}
+.bar-style::-webkit-progress-bar {
+    height: 10px;
+    background: #f0f0f0;
+    box-shadow: inset 3px 3px 10px #ccc;
+}
+.bar-style::-webkit-progress-value {
+    background: red;
+    transition: all 1s linear;
+}
 
+/* 게임 레이아웃 */
 body.inGame {
     width: 100vw;
     height: 100vh;
