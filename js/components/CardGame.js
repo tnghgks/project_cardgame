@@ -145,6 +145,7 @@ class CardGame extends Component {
   // 게임 실행 화면 스타일
   inGameStyle() {
     document.querySelector(".tit-game").classList.add("ir");
+    document.querySelector(".root").classList.add("inGame");
     document.body.classList.add("inGame");
   }
 
@@ -159,6 +160,7 @@ class CardGame extends Component {
   // 메인 화면 스타일
   initialBackground() {
     document.querySelector(".tit-game").classList.remove("ir");
+    document.querySelector(".root").classList.remove("inGame");
     document.body.classList.remove("inGame");
   }
 
