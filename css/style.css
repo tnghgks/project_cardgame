@@ -6,6 +6,10 @@
   font-style: normal;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* 애니메이션 */
 @keyframes move {
   from {
@@ -15,8 +19,44 @@
     background-position: -1000px -1000px;
   }
 }
-* {
-  box-sizing: border-box;
+
+@keyframes rota {
+  0% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(-5deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-5deg);
+  }
+  70% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /* 버튼 스타일 */
@@ -118,6 +158,14 @@ marquee > strong {
   border-radius: 10px;
   background-color: #ffeea2;
   transition: all 1s;
+}
+.item-card:hover {
+  background-color: rgb(9, 255, 0);
+  background-image: url("../img/pikachu.png");
+  background-size: 25%;
+  animation: rota 1s linear infinite;
+  overflow: hidden;
+  /* transform: translateY(-15%); */
 }
 
 .item-card.active {
