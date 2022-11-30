@@ -20,45 +20,6 @@
   }
 }
 
-@keyframes rota {
-  0% {
-    transform: rotate(0deg);
-  }
-  5% {
-    transform: rotate(-5deg);
-  }
-  20% {
-    transform: rotate(5deg);
-  }
-  20% {
-    transform: rotate(-5deg);
-  }
-  30% {
-    transform: rotate(5deg);
-  }
-  40% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-  60% {
-    transform: rotate(-5deg);
-  }
-  70% {
-    transform: rotate(5deg);
-  }
-  80% {
-    transform: rotate(-5deg);
-  }
-  90% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 /* 버튼 스타일 */
 .btn-style {
   opacity: 0.9;
@@ -160,12 +121,7 @@ marquee > strong {
   transition: all 1s;
 }
 .item-card:hover {
-  background-color: rgb(9, 255, 0);
-  background-image: url("../img/pikachu.png");
-  background-size: 25%;
-  animation: rota 1s linear infinite;
-  overflow: hidden;
-  /* transform: translateY(-15%); */
+  transform: translateY(-15%);
 }
 
 .item-card.active {
