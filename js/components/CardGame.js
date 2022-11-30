@@ -128,12 +128,26 @@ class CardGame extends Component {
     this.$target.appendChild($cardList);
   }
 
+  progressBar($progressBar, limitTime) {
+    const $cardList = document.querySelector(".list-card");
+
+    this.$target.insertBefore($progressBar, $cardList);
+
+    $progressBar.classList.add("bar-style");
+    $progressBar.setAttribute("max", limitTime - 1);
+    $progressBar.setAttribute("value", limitTime);
+  }
+
+  // 시간을 흘러가게 하면서 시간이 종료되면 모달창을 띄워준 뒤 초기화면
+  // 게임을 클리어하면 타이머함수를 종료시킨뒤에 모달창을 띄우고 시간을 변수에 저장
+  // Class 프로퍼티에 저장해주는 이유 => 다른 곳에서도 타이머 함수를 종료시켜줘야 할 상황이 있을수도 있음.
   timer(limitTime) {
-    // 시간을 흘러가게 하면서 시간이 종료되면 모달창을 띄워준 뒤 초기화면
-    // 게임을 클리어하면 타이머함수를 종료시킨뒤에 모달창을 띄우고 시간을 변수에 저장
-    // Class 프로퍼티에 저장해주는 이유 => 다른 곳에서도 타이머 함수를 종료시켜줘야 할 상황이 있을수도 있음.
+    const $progressBar = document.createElement("progress");
+    this.progressBar($progressBar, limitTime);
+
     this.timerId = setInterval(() => {
       limitTime--;
+      $progressBar.setAttribute("value", limitTime);
       if (limitTime === 0) {
         this.modal();
         this.score.defeat++;
