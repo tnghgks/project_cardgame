@@ -8,13 +8,14 @@ class CardGame extends Component {
     // 점수 관련된 친구들 객체로 변환
     super($target);
     this.clickCount = 0;
-    this.hitScore = 0;
-    this.failScore = 0;
-    this.victory = 0;
-    this.defeat = 0;
-    // this.totalFlipCount = 0;
-    this.totalHitScore = 0;
-    this.totalFailScore = 0;
+    this.score = {
+      hitScore: 0,
+      failScore: 0,
+      victory: 0,
+      defeat: 0,
+      totalHitScore: 0,
+      totalFailScore: 0,
+    };
     this.level = 0;
     this.$prevCardItem = "";
     this.prevCardData = "";
@@ -27,12 +28,13 @@ class CardGame extends Component {
     const scoreData = JSON.parse(localStorage.getItem("scoreBoard"));
 
     if (!scoreData) return;
-    console.log(scoreData);
-    this.victory = scoreData.victory;
-    this.defeat = scoreData.defeat;
-    // this.totalFlipCount = scoreData.totalFlipCount;
-    this.totalHitScore = scoreData.totalHitScore;
-    this.totalFailScore = scoreData.totalHitScore;
+    this.score = {
+      ...this.score,
+      victory: scoreData.victory,
+      defeat: scoreData.defeat,
+      totalHitScore: scoreData.totalHitScore,
+      totalFailScore: scoreData.totalHitScore,
+    };
   }
 
   template() {
@@ -50,16 +52,16 @@ class CardGame extends Component {
         <h2 class="tit-score-board ir">스코어 보드</h2>
         <marquee scrolldelay="100" scrollamount="20">
         <strong>종합점수</strong>
-        총 승리:${this.victory}
-        총 패배:${this.defeat} /
+        총 승리:${this.score.victory}
+        총 패배:${this.score.defeat} /
         <strong>난이도별 클리어 타임</strong>
         쉬움(4x4):32s
         중간(6x6):54s
         어려움(8x8):64s /
         <strong>이전 기록</strong>
-        뒤집은 총 횟수:${this.totalHitScore + this.totalFailScore}
-        맞은 횟수:${this.totalHitScore}
-        틀린 횟수:${this.totalFailScore}
+        뒤집은 총 횟수:${this.score.totalHitScore + this.score.totalFailScore}
+        맞은 횟수:${this.score.totalHitScore}
+        틀린 횟수:${this.score.totalFailScore}
         </marquee>
       </article>
     </main>
@@ -132,11 +134,9 @@ class CardGame extends Component {
     // Class 프로퍼티에 저장해주는 이유 => 다른 곳에서도 타이머 함수를 종료시켜줘야 할 상황이 있을수도 있음.
     this.timerId = setInterval(() => {
       limitTime--;
-      // console.log(limitTime);
       if (limitTime === 0) {
-        //alert("시간종료 !");
         this.modal();
-        this.defeat++;
+        this.score.defeat++;
         this.saveScoreInLocal();
       }
     }, 1000);
@@ -150,6 +150,7 @@ class CardGame extends Component {
 
   // 메인으로 이동했을 때 메인 화면 스타일로 초기화
   resetStyle() {
+    this.getScoreInLocal();
     this.setup();
     this.initialBackground();
     clearInterval(this.timerId);
@@ -195,8 +196,8 @@ class CardGame extends Component {
           this.gotCard(event.target.parentNode);
         }, 400);
       } else {
-        this.failScore++;
-        this.totalFailScore++;
+        this.score.failScore++;
+        this.score.totalFailScore++;
       }
     }
     //2장 모두 뒤집었을때 초기화 코드
@@ -225,10 +226,10 @@ class CardGame extends Component {
     this.$prevCardItem.classList.add("div-hidden");
     colletCard.classList.add("div-hidden");
 
-    this.hitScore++;
-    this.totalHitScore++;
+    this.score.hitScore++;
+    this.score.totalHitScore++;
 
-    this.checkHitScore(this.hitScore);
+    this.checkHitScore(this.score.hitScore);
   }
 
   // 선택했던 카드 다시 뒤집기
@@ -246,8 +247,8 @@ class CardGame extends Component {
 
   // 한 게임에 대한 모달창 결과를 위한 스코어 리셋
   resetScore() {
-    this.hitScore = 0;
-    this.failScore = 0;
+    this.score.hitScore = 0;
+    this.score.failScore = 0;
   }
 
   // 타이머 시간 안에 카드를 모두 뒤집었을 때
@@ -256,25 +257,23 @@ class CardGame extends Component {
     if (score === this.level ** 2 / 2) {
       setTimeout(() => {
         this.modal();
-        this.victory++;
+        this.score.victory++;
         this.saveScoreInLocal();
       }, 1000);
     }
   }
 
   modal() {
-    new Modal(this.limitTime, this.hitScore, this.failScore);
+    new Modal(this.limitTime, this.score.hitScore, this.score.failScore);
 
     const btnGoMain = document.querySelector(".btn-go-main");
     const btnReturn = document.querySelector(".btn-return");
 
     btnGoMain.addEventListener("click", (event) => {
-      console.log("메인으로");
       this.resetStyle();
       this.resetScore();
     });
     btnReturn.addEventListener("click", (event) => {
-      console.log("재시도");
       this.paintCardGame(this.level);
       this.resetScore();
     });
@@ -282,16 +281,7 @@ class CardGame extends Component {
 
   // 로컬스토리지에 스코어 정보 저장하기
   saveScoreInLocal() {
-    localStorage.setItem(
-      "scoreBoard",
-      JSON.stringify({
-        victory: this.victory,
-        defeat: this.defeat,
-        // totalFlipCount: this.totalHitScore + this.totalFailScore,
-        totalHitScore: this.totalHitScore,
-        totalFailScore: this.totalFailScore,
-      })
-    );
+    localStorage.setItem("scoreBoard", JSON.stringify(this.score));
   }
 }
 export default CardGame;
