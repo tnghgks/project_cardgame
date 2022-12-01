@@ -160,7 +160,7 @@ class CardGame extends Component {
 
     this.timerId = setInterval(() => {
       this.clearTime--;
-      $progressBar.setAttribute("value", this.clearTime);
+      $progressBar.setAttribute("value", this.clearTime - 1);
       if (this.clearTime === 0) {
         this.modal(false);
         clearInterval(this.timerId);
