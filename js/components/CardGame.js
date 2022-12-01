@@ -144,12 +144,14 @@ class CardGame extends Component {
   timer(limitTime) {
     const $progressBar = document.createElement("progress");
     this.progressBar($progressBar, limitTime);
+    this.clearTime = limitTime;
 
     this.timerId = setInterval(() => {
-      limitTime--;
-      $progressBar.setAttribute("value", limitTime);
-      if (limitTime === 0) {
-        this.modal();
+      this.clearTime--;
+      $progressBar.setAttribute("value", this.clearTime);
+      if (this.clearTime === 0) {
+        this.modal(false);
+        clearInterval(this.timerId);
         this.score.defeat++;
         this.saveScoreInLocal();
       }
@@ -272,15 +274,16 @@ class CardGame extends Component {
   checkHitScore(score) {
     if (score === this.level ** 2 / 2) {
       setTimeout(() => {
-        this.modal();
+        this.modal(true);
+        clearInterval(this.timerId);
         this.score.victory++;
         this.saveScoreInLocal();
       }, 1000);
     }
   }
 
-  modal() {
-    new Modal(this.limitTime, this.score.hitScore, this.score.failScore);
+  modal(winOrLose) {
+    new Modal(this.limitTime, this.clearTime, winOrLose, this.score.hitScore, this.score.failScore);
 
     const btnGoMain = document.querySelector(".btn-go-main");
     const btnReturn = document.querySelector(".btn-return");

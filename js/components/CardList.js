@@ -7,6 +7,7 @@ class CardList extends Component {
     this.levelToString(level);
     this.setup();
     $target.classList.add(this.level);
+    this.allflip();
   }
   levelToString(level) {
     switch (level) {
@@ -24,15 +25,27 @@ class CardList extends Component {
 
   template(card) {
     return `
-    <li class="item-card">
+    <li class="item-card active">
       <div class="div-back"></div>
-      <div class="div-front div-hidden" style="background-position: ${card.position.x}px ${card.position.y}px;"></div>
+      <div class="div-front" style="background-position: ${card.position.x}px ${card.position.y}px;"></div>
     </li>`;
   }
   render() {
     this.cardData.forEach((card) => {
       this.$target.innerHTML += this.template(card);
     });
+  }
+
+  allflip() {
+    const $cards = this.$target.querySelectorAll(".item-card");
+
+    setTimeout(() => {
+      $cards.forEach(($item) => {
+        const $front = $item.querySelector(".div-front");
+        $item.classList.remove("active");
+        $front.classList.add("div-hidden");
+      });
+    }, 2000);
   }
 }
 
