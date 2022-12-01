@@ -7,7 +7,6 @@ class CardList extends Component {
     this.levelToString(level);
     this.setup();
     $target.classList.add(this.level);
-    this.allflip();
   }
   levelToString(level) {
     switch (level) {
@@ -34,18 +33,6 @@ class CardList extends Component {
     this.cardData.forEach((card) => {
       this.$target.innerHTML += this.template(card);
     });
-  }
-
-  allflip() {
-    const $cards = this.$target.querySelectorAll(".item-card");
-
-    setTimeout(() => {
-      $cards.forEach(($item) => {
-        const $front = $item.querySelector(".div-front");
-        $item.classList.remove("active");
-        $front.classList.add("div-hidden");
-      });
-    }, 2000);
   }
 }
 

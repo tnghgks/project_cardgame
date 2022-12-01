@@ -126,6 +126,18 @@ class CardGame extends Component {
     new CardList($cardList, cardData, this.level);
 
     this.$target.appendChild($cardList);
+
+    this.showCardBeforeStart(this.level);
+  }
+
+  showCardBeforeStart(level) {
+    const getItemCard = document.querySelectorAll(".item-card");
+
+    setTimeout(() => {
+      getItemCard.forEach((item) => {
+        item.classList.remove("active");
+      });
+    }, (level * 1000) / 2);
   }
 
   progressBar($progressBar, limitTime) {
