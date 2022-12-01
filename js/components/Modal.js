@@ -22,10 +22,10 @@ class Modal extends Component {
     return `
         <article class="modal">
         <h2 class="tit-modal">게임종료</h2>
-        ${this.winOrLose ? `<p>클리어 시간 :<span>${this.clearTime}s</span></p>` : `<p><span> 타임아웃 ! </span></p>`}
+        ${this.winOrLose ? `<p>클리어 시간 :<span>${this.limitTime - this.clearTime}s</span></p>` : `<p><span> 타임아웃 ! </span></p>`}
             <p>
                 총 점수 :
-                <span>${(this.limitTime - this.clearTime) * 5 + this.hitScore * 10}</span>
+                <span>${this.clearTime * 5 + this.hitScore * 10}</span>
             </p>
             <p>
                 맞춘 횟수 :
