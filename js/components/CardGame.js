@@ -23,20 +23,6 @@ class CardGame extends Component {
     this.getScoreInLocal();
   }
 
-  // 로컬스토리지에 저장한 스코어 정보 가져오기
-  getScoreInLocal() {
-    const scoreData = JSON.parse(localStorage.getItem("scoreBoard"));
-
-    if (!scoreData) return;
-    this.score = {
-      ...this.score,
-      victory: scoreData.victory,
-      defeat: scoreData.defeat,
-      totalHitScore: scoreData.totalHitScore,
-      totalFailScore: scoreData.totalHitScore,
-    };
-  }
-
   template() {
     return ` 
     <h1 class="tit-game">피카츄 카드 게임</h1>
@@ -67,6 +53,20 @@ class CardGame extends Component {
     </main>
     <footer></footer>
     `;
+  }
+  // 로컬스토리지에 저장한 스코어 정보 가져오기
+  getScoreInLocal() {
+    const scoreData = JSON.parse(localStorage.getItem("scoreBoard"));
+
+    if (scoreData) {
+      this.score = {
+        ...this.score,
+        victory: scoreData.victory,
+        defeat: scoreData.defeat,
+        totalHitScore: scoreData.totalHitScore,
+        totalFailScore: scoreData.totalHitScore,
+      };
+    }
   }
 
   handleLevelBtn(event) {
@@ -99,8 +99,13 @@ class CardGame extends Component {
     this.level = level;
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
-    this.limitTime = level * 10;
-    // this.limitTime = 2;
+    if (level === 4) {
+      this.limitTime = 40;
+    } else if (level === 6) {
+      this.limitTime = 90;
+    } else if (level === 8) {
+      this.limitTime = 200;
+    }
 
     // 모든 카드 렌더링
     const cardData = await this.getData(this.totalCardCount);
