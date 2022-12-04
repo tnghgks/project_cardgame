@@ -40,10 +40,6 @@ class CardGame extends Component {
         <strong>종합점수</strong>
         총 승리:${this.score.victory}
         총 패배:${this.score.defeat} /
-        <strong>난이도별 클리어 타임</strong>
-        쉬움(4x4):32s
-        중간(6x6):54s
-        어려움(8x8):64s /
         <strong>이전 기록</strong>
         뒤집은 총 횟수:${this.score.totalHitScore + this.score.totalFailScore}
         맞은 횟수:${this.score.totalHitScore}
@@ -106,7 +102,6 @@ class CardGame extends Component {
     } else if (level === 8) {
       this.limitTime = 200;
     }
-
     // 모든 카드 렌더링
     const cardData = await this.getData(this.totalCardCount);
     const totalCardData = cardData.concat(cardData);
@@ -151,7 +146,7 @@ class CardGame extends Component {
     this.$target.insertBefore($progressBar, $cardList);
 
     $progressBar.classList.add("bar-style");
-    $progressBar.setAttribute("max", limitTime - 1);
+    $progressBar.setAttribute("max", limitTime);
     $progressBar.setAttribute("value", limitTime);
   }
 
