@@ -96,11 +96,11 @@ class CardGame extends Component {
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
     if (level === 4) {
-      this.limitTime = 40;
+      this.limitTime = 35;
     } else if (level === 6) {
-      this.limitTime = 90;
+      this.limitTime = 85;
     } else if (level === 8) {
-      this.limitTime = 200;
+      this.limitTime = 190;
     }
     // 모든 카드 렌더링
     const cardData = await this.getData(this.totalCardCount);
@@ -243,7 +243,7 @@ class CardGame extends Component {
         this.replaceCard();
         this.prevCardData = "";
         this.$prevCardItem = "";
-      }, 500);
+      }, 600);
       this.clickCount = 0;
 
       return;
