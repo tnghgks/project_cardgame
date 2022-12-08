@@ -14,6 +14,7 @@ class Component {
   template() {
     return;
   }
+
   addEvent() {}
 }
 
