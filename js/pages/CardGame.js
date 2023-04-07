@@ -1,15 +1,31 @@
 import CardList from "../components/CardList.js";
+import ProgressBar from "../components/ProgressBar.js";
 
 export default function CardGame({ $target, level }) {
-  const $page = document.createElement("div");
+  this.template = () => {
+    return `<main class="inGame">
+                <div class="progress_container"></div>
+                <ul class="list-card ${level}"></ul>
+            </main>`;
+  };
 
-  $page.className = "CardGame";
+  this.mount = () => {
+    const $progressContainer = $target.querySelector(".progress_container");
+    const $listCard = $target.querySelector(".list-card");
 
-  new CardList({
-    $target: $page,
-  });
+    new ProgressBar({
+      $target: $progressContainer,
+    });
+
+    new CardList({
+      $target: $listCard,
+    });
+  };
 
   this.render = () => {
-    $target.appendChild($page);
+    $target.innerHTML = this.template();
+    this.mount();
   };
+
+  this.render();
 }
