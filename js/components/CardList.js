@@ -1,3 +1,5 @@
+import { request } from "../api/client.js";
+
 export default function CardList({ $target }) {
   const $cardList = document.createElement("ul");
   $cardList.classList = "list-card easy";
@@ -9,6 +11,13 @@ export default function CardList({ $target }) {
     this.state = nextState;
     this.render();
   };
+
+  const fetchCardList = async () => {
+    const cardList = await request("/json/card.json");
+    this.setState(cardList);
+  };
+
+  fetchCardList();
 
   this.render = () => {
     if (!this.state) {
