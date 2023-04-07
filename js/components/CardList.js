@@ -1,11 +1,7 @@
 import { request } from "../api/client.js";
 
-export default function CardList({ $target }) {
-  const $cardList = document.createElement("ul");
-  $cardList.classList = "list-card easy";
-  $target.appendChild($cardList);
-
-  this.state = [];
+export default function CardList({ $target, initialState }) {
+  this.state = initialState;
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -19,12 +15,12 @@ export default function CardList({ $target }) {
 
   fetchCardList();
 
-  this.render = () => {
+  this.template = () => {
     if (!this.state) {
       return;
     }
 
-    $cardList.innerHTML = `
+    return `
     ${this.state
       .map(
         (card) =>
@@ -36,6 +32,10 @@ export default function CardList({ $target }) {
           `
       )
       .join("")}`;
+  };
+
+  this.render = () => {
+    $target.innerHTML = this.template();
   };
 
   this.render();
