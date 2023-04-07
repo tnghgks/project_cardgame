@@ -13,9 +13,6 @@ class Modal extends Component {
 
   render() {
     this.$target.innerHTML += this.template();
-    console.log("클리어타임", this.clearTime);
-    console.log("리밋타임", this.limitTime);
-    console.log(this.limitTime - this.clearTime);
   }
 
   template() {

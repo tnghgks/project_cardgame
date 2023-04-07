@@ -96,11 +96,11 @@ class CardGame extends Component {
     this.$target.innerHTML = "";
     this.totalCardCount = level * level;
     if (level === 4) {
-      this.limitTime = 40;
+      this.limitTime = 35;
     } else if (level === 6) {
-      this.limitTime = 90;
+      this.limitTime = 85;
     } else if (level === 8) {
-      this.limitTime = 200;
+      this.limitTime = 190;
     }
     // 모든 카드 렌더링
     const cardData = await this.getData(this.totalCardCount);
@@ -213,7 +213,8 @@ class CardGame extends Component {
     $cardItem.classList.add("active");
     $front.classList.remove("div-hidden");
 
-    const currentCardData = $front.style.backgroundPosition.split(" ").map((item) => parseInt(item)); // 현재 클릭 카드의 [x, y] 값
+    // 현재 클릭 카드의 [x, y] 값
+    const currentCardData = $front.style.backgroundPosition.split(" ").map((item) => parseInt(item));
 
     if (!this.prevCardData) {
       // 첫번째로 클릭 카드의 데이터가 없으면
@@ -242,7 +243,7 @@ class CardGame extends Component {
         this.replaceCard();
         this.prevCardData = "";
         this.$prevCardItem = "";
-      }, 800);
+      }, 600);
       this.clickCount = 0;
 
       return;
@@ -300,11 +301,11 @@ class CardGame extends Component {
     const btnGoMain = document.querySelector(".btn-go-main");
     const btnReturn = document.querySelector(".btn-return");
 
-    btnGoMain.addEventListener("click", (event) => {
+    btnGoMain.addEventListener("click", () => {
       this.resetStyle();
       this.resetScore();
     });
-    btnReturn.addEventListener("click", (event) => {
+    btnReturn.addEventListener("click", () => {
       this.paintCardGame(this.level);
       this.resetScore();
     });

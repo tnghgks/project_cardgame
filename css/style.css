@@ -118,7 +118,7 @@ marquee > strong {
   aspect-ratio: 193 / 264;
   border-radius: 10px;
   background-color: #ffeea2;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .item-card:hover {
   transform: translateY(-15%);
@@ -136,15 +136,6 @@ marquee > strong {
   background-repeat: no-repeat;
   backface-visibility: hidden;
 }
-/* .div-back {
-  background-image: url("../img/card-back.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 150px;
-  height: 205px;
-  backface-visibility: hidden;
-} */
-
 .div-front {
   position: absolute;
   top: 50%;
@@ -157,7 +148,7 @@ marquee > strong {
   display: block;
   transform: translate(-50%, -50%) rotateY(180deg);
   backface-visibility: hidden;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .div-hidden {
