@@ -1,9 +1,23 @@
-export default function ProgressBar({ $target }) {
-  this.state = { max: 100, value: 30 };
+export default function ProgressBar({ $target, props }) {
+  this.state = { timerId: "", clearTime: "", max: props.max, value: props.max };
 
   this.setState = (nextState) => {
-    this.state = nextState;
+    this.state = { ...this.state, ...nextState };
     this.render();
+  };
+
+  // 타이머 함수
+  this.timer = (limitTime) => {
+    this.setState({
+      timerId: setInterval(() => {
+        limitTime--;
+        this.setState({ clearTime: limitTime, value: limitTime });
+
+        if (this.state.clearTime <= 0) {
+          clearInterval(this.state.timerId);
+        }
+      }, 1000),
+    });
   };
 
   this.template = () => {
@@ -14,6 +28,8 @@ export default function ProgressBar({ $target }) {
   this.render = () => {
     $target.innerHTML = this.template();
   };
+
+  this.timer(props.max);
 
   this.render();
 }
