@@ -1,7 +1,7 @@
 import { request } from "../api/client.js";
 
-export default function CardList({ $target, initialState }) {
-  this.state = initialState;
+export default function CardList({ $target, props }) {
+  this.state = [];
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -10,7 +10,16 @@ export default function CardList({ $target, initialState }) {
 
   const fetchCardList = async () => {
     const cardList = await request("/json/card.json");
-    this.setState(cardList);
+
+    // 총 개수의 반만 가져오기
+    const halfCardList = cardList.slice(0, props.initCount / 2);
+
+    // 카드 합치기
+    const totalCardList = halfCardList.concat(halfCardList);
+    // 카드 섞기
+    totalCardList.sort(() => Math.random() - 0.5);
+
+    this.setState(totalCardList);
   };
 
   fetchCardList();
