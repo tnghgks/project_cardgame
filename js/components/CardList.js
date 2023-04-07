@@ -1,39 +1,33 @@
-import Component from "../core/Component.js";
+export default function CardList({ $target }) {
+  const $cardList = document.createElement("ul");
+  $cardList.classList = "list-card easy";
+  $target.appendChild($cardList);
 
-class CardList extends Component {
-  constructor($target, cardData, level) {
-    super($target);
-    this.cardData = cardData;
-    this.levelToString(level);
-    this.setup();
-    $target.classList.add(this.level);
-  }
-  levelToString(level) {
-    switch (level) {
-      case 4:
-        this.level = "easy";
-        break;
-      case 6:
-        this.level = "normal";
-        break;
-      case 8:
-        this.level = "hard";
-        break;
+  this.state = [];
+
+  this.setState = (nextState) => {
+    this.state = nextState;
+    this.render();
+  };
+
+  this.render = () => {
+    if (!this.state) {
+      return;
     }
-  }
 
-  template(card) {
-    return `
-    <li class="item-card active">
-      <div class="div-back"></div>
-      <div class="div-front" style="background-position: ${card.position.x}px ${card.position.y}px;"></div>
-    </li>`;
-  }
-  render() {
-    this.cardData.forEach((card) => {
-      this.$target.innerHTML += this.template(card);
-    });
-  }
+    $cardList.innerHTML = `
+    ${this.state
+      .map(
+        (card) =>
+          `
+          <li class="item-card active">
+            <div class="div-back"></div>
+            <div class="div-front" style="background-position: ${card.position.x}px ${card.position.y}px;"></div>
+          </li>
+          `
+      )
+      .join("")}`;
+  };
+
+  this.render();
 }
-
-export default CardList;
