@@ -1,5 +1,6 @@
 import CardList from "../components/CardList.js";
 import ProgressBar from "../components/ProgressBar.js";
+import { cardInitCount, limitTime } from "../constant/cardGameConfig.js";
 
 export default function CardGame({ $target, level }) {
   this.template = () => {
@@ -15,10 +16,26 @@ export default function CardGame({ $target, level }) {
 
     new ProgressBar({
       $target: $progressContainer,
+      props: {
+        max:
+          level === "easy"
+            ? limitTime.easy
+            : level === "normal"
+            ? limitTime.normal
+            : limitTime.hard,
+      },
     });
 
     new CardList({
       $target: $listCard,
+      props: {
+        initCount:
+          level === "easy"
+            ? cardInitCount.easy
+            : level === "normal"
+            ? cardInitCount.normal
+            : cardInitCount.hard,
+      },
     });
   };
 
