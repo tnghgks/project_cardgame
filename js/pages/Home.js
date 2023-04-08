@@ -38,4 +38,6 @@ export default function Home({ $target }) {
   this.render = () => {
     $target.appendChild($page);
   };
+
+  this.render();
 }
