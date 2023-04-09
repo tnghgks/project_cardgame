@@ -28,4 +28,72 @@ export default function CardManager() {
       });
     }, time);
   };
+
+  this.cardFlip = ($target) => {
+    const $cardItem = $target;
+    const $cardFront = $target.querySelector(".div-front");
+
+    $cardItem.classList.add("active");
+    $cardFront.classList.remove("div-hidden");
+  };
+
+  this.initCard = ($target) => {
+    const $cardItem = $target;
+    const $cardFront = $target.querySelector(".div-front");
+
+    $cardItem.classList.remove("active");
+    $cardFront.classList.add("div-hidden");
+  };
+
+  this.getCardPosition = ($target) => {
+    const $cardFront = $target.querySelector(".div-front");
+
+    //Card background Position의 [x,y] 값 return
+    return $cardFront.style.backgroundPosition.split(" ").map((item) => parseInt(item));
+  };
+
+  // 카드의 포지션으로 값 비교
+  this.compareCard = (prevCardPosition, curCardPosition) => {
+    return prevCardPosition.toString() === curCardPosition.toString();
+  };
+
+  this.replaceCard = ($prev, $current) => {
+    setTimeout(() => {
+      this.initCard($prev);
+      this.initCard($current);
+      this.enableCardEvent();
+    }, 600);
+  };
+
+  this.disableCardEvent = () => {
+    const $backDiv = document.querySelectorAll(".div-back");
+    $backDiv.forEach((item) => {
+      item.style.pointerEvents = "none";
+    });
+  };
+
+  this.enableCardEvent = () => {
+    const $backDiv = document.querySelectorAll(".div-back");
+    $backDiv.forEach((item) => {
+      item.style.pointerEvents = "auto";
+    });
+  };
+
+  this.deleteCard = ($prevCard, $curCard) => {
+    $prevCard.querySelector(".div-front").classList.add("div-hidden");
+    $curCard.querySelector(".div-front").classList.add("div-hidden");
+
+    $cardItem.classList.remove("active");
+    $cardItem.classList.remove("active");
+
+    $prevCard.classList.add("div-hidden");
+    $curCard.classList.add("div-hidden");
+  };
+
+  this.matchedCard = ($prevCard, $curCard) => {
+    setTimeout(() => {
+      this.deleteCard($prevCard, $curCard);
+      this.enableCardEvent();
+    }, 600);
+  };
 }
