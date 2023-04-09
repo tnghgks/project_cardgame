@@ -1,4 +1,4 @@
-import { routeChange } from "../utils/router.js";
+import { routeChange } from "../lib/utils/router.js";
 
 export default function Home({ $target }) {
   const $page = document.createElement("div");
@@ -39,5 +39,7 @@ export default function Home({ $target }) {
     $target.appendChild($page);
   };
 
-  this.render();
+  this.setup = () => {
+    this.render();
+  };
 }

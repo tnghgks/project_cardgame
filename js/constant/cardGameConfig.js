@@ -9,3 +9,9 @@ export const cardInitCount = {
   normal: 32,
   easy: 16,
 };
+
+export const showTime = {
+  hard: 4000,
+  normal: 3000,
+  easy: 2000,
+};
