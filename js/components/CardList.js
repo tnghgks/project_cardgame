@@ -1,28 +1,16 @@
 import { request } from "../api/client.js";
+import CardManager from "../lib/service/CardManager.js";
 
 export default function CardList({ $target, props }) {
+  const { pathname } = location;
+  const [, , level] = pathname.split("/");
+
   this.state = [];
 
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
   };
-
-  const fetchCardList = async () => {
-    const cardList = await request("/json/card.json");
-
-    // 총 개수의 반만 가져오기
-    const halfCardList = cardList.slice(0, props.initCount / 2);
-
-    // 카드 합치기
-    const totalCardList = halfCardList.concat(halfCardList);
-    // 카드 섞기
-    totalCardList.sort(() => Math.random() - 0.5);
-
-    this.setState(totalCardList);
-  };
-
-  fetchCardList();
 
   this.template = () => {
     if (!this.state) {
@@ -47,5 +35,16 @@ export default function CardList({ $target, props }) {
     $target.innerHTML = this.template();
   };
 
-  this.render();
+  this.setup = async () => {
+    const cardManager = new CardManager();
+
+    this.render();
+
+    const cardList = await cardManager.setCardList(props.initCount);
+    this.setState(cardList);
+
+    cardManager.showCardBeforeStart(level);
+  };
+
+  this.setup();
 }

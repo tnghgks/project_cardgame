@@ -39,5 +39,7 @@ export default function Home({ $target }) {
     $target.appendChild($page);
   };
 
-  this.render();
+  this.setup = () => {
+    this.render();
+  };
 }

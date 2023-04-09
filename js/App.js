@@ -9,10 +9,10 @@ export default function App({ $target }) {
     $target.innerHTML = "";
 
     if (pathname === "/") {
-      new Home({ $target });
+      new Home({ $target }).setup();
     } else if (pathname.indexOf("/cardGame/") === 0) {
       const [, , level] = pathname.split("/");
-      new CardGame({ $target, level });
+      new CardGame({ $target, level }).setup();
     }
   };
 
