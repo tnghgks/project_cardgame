@@ -1,6 +1,6 @@
 export default function ScoreManager() {
-  this.scoreData = {
-    winOrLose: 0,
+  let scoreData = {
+    winOrLose: false,
     limitTime: 0,
     clearTime: 0,
     hitScore: 0,
@@ -8,10 +8,26 @@ export default function ScoreManager() {
   };
 
   this.getScoreData = () => {
-    return { ...this.scoreData };
+    return { ...scoreData };
   };
 
-  this.setScoreData = (scoreData) => {
-    this.scoreData = { ...this.scoreData, ...scoreData };
+  this.addHitScore = () => {
+    scoreData = { ...scoreData, hitScore: scoreData.hitScore + 1 };
+  };
+
+  this.addFailScore = () => {
+    scoreData = { ...scoreData, failScore: scoreData.failScore + 1 };
+  };
+
+  this.setClearTime = (clearTime) => {
+    scoreData = { ...scoreData, clearTime };
+  };
+
+  this.setWinOrLose = (winOrLose) => {
+    scoreData = { ...scoreData, winOrLose };
+  };
+
+  this.setLimitTime = (limitTime) => {
+    scoreData = { ...scoreData, limitTime };
   };
 }

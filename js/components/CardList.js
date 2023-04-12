@@ -1,4 +1,3 @@
-import { request } from "../api/client.js";
 import CardManager from "../lib/service/CardManager.js";
 
 export default function CardList({ $target, props }) {

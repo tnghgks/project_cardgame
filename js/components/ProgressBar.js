@@ -14,11 +14,17 @@ export default function ProgressBar({ $target, props }) {
   this.timer = (limitTime) => {
     this.setState({
       timerId: setInterval(() => {
-        limitTime--;
-        this.setState({ clearTime: limitTime, value: limitTime });
-        if (this.state.clearTime <= 0) {
+        if (!scoreManager.getScoreData().winOrLose) {
+          limitTime--;
+          this.setState({ clearTime: limitTime, value: limitTime });
+
+          if (this.state.clearTime <= 0) {
+            clearInterval(this.state.timerId);
+            routeChange("/result");
+          }
+        } else {
           clearInterval(this.state.timerId);
-          scoreManager.setScoreData({ hitScore: 30 });
+          scoreManager.setClearTime(limitTime);
           routeChange("/result");
         }
       }, 1000),
@@ -35,8 +41,7 @@ export default function ProgressBar({ $target, props }) {
   };
 
   this.setup = () => {
-    // this.timer(props.max);
-    this.timer(2); // 테스트용 시간 감축
+    this.timer(props.max);
 
     this.render();
   };
