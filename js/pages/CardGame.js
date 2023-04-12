@@ -3,8 +3,10 @@ import ProgressBar from "../components/ProgressBar.js";
 import { cardInitCount, limitTime } from "../constant/cardGameConfig.js";
 import CardManager from "../lib/service/CardManager.js";
 
-export default function CardGame({ $target, level }) {
+export default function CardGame({ $target, props }) {
+  const { level, scoreManager } = props;
   this.$previousCard;
+  this.matchedCount = 0;
 
   this.template = () => {
     return `<main class="inGame">
@@ -26,6 +28,7 @@ export default function CardGame({ $target, level }) {
             : level === "normal"
             ? limitTime.normal
             : limitTime.hard,
+        scoreManager,
       },
     });
 
@@ -38,6 +41,7 @@ export default function CardGame({ $target, level }) {
             : level === "normal"
             ? cardInitCount.normal
             : cardInitCount.hard,
+        scoreManager,
       },
     });
   };
@@ -48,11 +52,12 @@ export default function CardGame({ $target, level }) {
   };
 
   this.setEvent = () => {
+    // 카드 클릭 이벤트
     $target.addEventListener("click", async ({ target }) => {
       if (target.className !== "div-back") return;
 
       const $currentCard = target.closest(".item-card");
-
+      const totalCardCount = $target.querySelectorAll(".item-card").length;
       const cardManager = new CardManager();
 
       cardManager.cardFlip($currentCard);
@@ -73,9 +78,17 @@ export default function CardGame({ $target, level }) {
         if (cardManager.compareCard(prevCardPosition, curCardPosition)) {
           // 포지션이 같으면 점수 추가 및 카드 삭제
           cardManager.matchedCard(this.$previousCard, $currentCard);
+          scoreManager.addHitScore();
+          this.matchedCount += 2;
+
+          //맞춘 카드 개수와 총 개수가 같다면 게임 종료
+          if (this.matchedCount === totalCardCount) {
+            scoreManager.setWinOrLose(true);
+          }
         } else {
           // 포지션이 다르면 카드 원상복구 및 Event Enable
           cardManager.replaceCard(this.$previousCard, $currentCard);
+          scoreManager.addFailScore();
         }
         this.$previousCard = null;
       } else {
