@@ -1,8 +1,11 @@
 import CardGame from "./pages/CardGame.js";
 import Home from "./pages/Home.js";
 import { init } from "./lib/utils/router.js";
+import ScoreManager from "./lib/service/ScoreManager.js";
 
 export default function App({ $target }) {
+  const scoreManager = new ScoreManager();
+
   this.route = () => {
     const { pathname } = location;
 
@@ -12,7 +15,10 @@ export default function App({ $target }) {
       new Home({ $target }).setup();
     } else if (pathname.indexOf("/cardGame/") === 0) {
       const [, , level] = pathname.split("/");
-      new CardGame({ $target, level }).setup();
+      new CardGame({
+        $target,
+        props: { level, scoreManager },
+      }).setup();
     }
   };
 

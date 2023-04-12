@@ -3,7 +3,9 @@ import ProgressBar from "../components/ProgressBar.js";
 import { cardInitCount, limitTime } from "../constant/cardGameConfig.js";
 import CardManager from "../lib/service/CardManager.js";
 
-export default function CardGame({ $target, level }) {
+export default function CardGame({ $target, props }) {
+  const { level, scoreManager } = props;
+
   this.$previousCard;
 
   this.template = () => {
@@ -26,6 +28,7 @@ export default function CardGame({ $target, level }) {
             : level === "normal"
             ? limitTime.normal
             : limitTime.hard,
+        scoreManager,
       },
     });
 
@@ -38,6 +41,7 @@ export default function CardGame({ $target, level }) {
             : level === "normal"
             ? cardInitCount.normal
             : cardInitCount.hard,
+        scoreManager,
       },
     });
   };
@@ -48,6 +52,7 @@ export default function CardGame({ $target, level }) {
   };
 
   this.setEvent = () => {
+    // 카드 클릭 이벤트
     $target.addEventListener("click", async ({ target }) => {
       if (target.className !== "div-back") return;
 

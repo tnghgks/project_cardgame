@@ -1,5 +1,9 @@
+import { routeChange } from "../lib/utils/router.js";
+
 export default function ProgressBar({ $target, props }) {
-  this.state = { timerId: "", clearTime: "", max: props.max, value: props.max };
+  const { max, scoreManager } = props;
+
+  this.state = { timerId: "", clearTime: "", max, value: max };
 
   this.setState = (nextState) => {
     this.state = { ...this.state, ...nextState };
@@ -12,9 +16,10 @@ export default function ProgressBar({ $target, props }) {
       timerId: setInterval(() => {
         limitTime--;
         this.setState({ clearTime: limitTime, value: limitTime });
-
         if (this.state.clearTime <= 0) {
           clearInterval(this.state.timerId);
+          scoreManager.setScoreData({ hitScore: 30 });
+          routeChange("/result");
         }
       }, 1000),
     });
@@ -29,7 +34,12 @@ export default function ProgressBar({ $target, props }) {
     $target.innerHTML = this.template();
   };
 
-  this.timer(props.max);
+  this.setup = () => {
+    // this.timer(props.max);
+    this.timer(2); // 테스트용 시간 감축
 
-  this.render();
+    this.render();
+  };
+
+  this.setup();
 }
