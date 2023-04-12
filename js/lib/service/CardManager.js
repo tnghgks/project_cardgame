@@ -81,12 +81,11 @@ export default function CardManager() {
 
   this.deleteCard = ($prevCard, $curCard) => {
     $prevCard.querySelector(".div-front").classList.add("div-hidden");
-    $curCard.querySelector(".div-front").classList.add("div-hidden");
-
-    $cardItem.classList.remove("active");
-    $cardItem.classList.remove("active");
-
+    $prevCard.classList.remove("active");
     $prevCard.classList.add("div-hidden");
+
+    $curCard.querySelector(".div-front").classList.add("div-hidden");
+    $curCard.classList.remove("active");
     $curCard.classList.add("div-hidden");
   };
 
