@@ -100,5 +100,6 @@ export default function CardGame({ $target, props }) {
   this.setup = () => {
     this.render();
     this.setEvent();
+    scoreManager.initScoreData();
   };
 }
