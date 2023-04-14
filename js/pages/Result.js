@@ -1,3 +1,5 @@
+import { routeChange } from "../lib/utils/router.js";
+
 export default function Result({ $target, props }) {
   const { scoreManager } = props;
 
@@ -11,7 +13,7 @@ export default function Result({ $target, props }) {
         <h2 class="tit-modal">게임종료</h2>
         ${
           winOrLose
-            ? `<p>클리어 시간 :<span>${clearTime}s</span></p>`
+            ? `<p>남은 시간 :<span>${clearTime}s</span></p>`
             : `<p><span> 타임아웃 ! </span></p>`
         }
             <p>
@@ -37,9 +39,20 @@ export default function Result({ $target, props }) {
     $target.innerHTML = this.template();
   };
 
-  this.setEvent = () => {};
+  this.setEvent = () => {
+    $target.addEventListener("click", ({ target }) => {
+      if (target.classList.contains("btn-go-main")) {
+        routeChange("/");
+      }
+      if (target.classList.contains("btn-return")) {
+        // routeChange("/cardGame/easy");
+        routeChange("/"); // 임시
+      }
+    });
+  };
 
   this.setup = () => {
     this.render();
+    this.setEvent();
   };
 }

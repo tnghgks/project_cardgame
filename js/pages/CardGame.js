@@ -4,7 +4,7 @@ import { cardInitCount, limitTime } from "../constant/cardGameConfig.js";
 import CardManager from "../lib/service/CardManager.js";
 
 export default function CardGame({ $target, props }) {
-  const { level, scoreManager } = props;
+  const { level, scoreManager, timerManager } = props;
   this.$previousCard;
   this.matchedCount = 0;
 
@@ -29,6 +29,7 @@ export default function CardGame({ $target, props }) {
             ? limitTime.normal
             : limitTime.hard,
         scoreManager,
+        timerManager,
       },
     });
 
@@ -55,7 +56,6 @@ export default function CardGame({ $target, props }) {
     // 카드 클릭 이벤트
     $target.addEventListener("click", async ({ target }) => {
       if (target.className !== "div-back") return;
-
       const $currentCard = target.closest(".item-card");
       const totalCardCount = $target.querySelectorAll(".item-card").length;
       const cardManager = new CardManager();
