@@ -10,6 +10,15 @@ export default function ScoreManager() {
   this.getScoreData = () => {
     return { ...scoreData };
   };
+  this.initScoreData = () => {
+    scoreData = {
+      winOrLose: false,
+      limitTime: 0,
+      clearTime: 0,
+      hitScore: 0,
+      failScore: 0,
+    };
+  };
 
   this.addHitScore = () => {
     scoreData = { ...scoreData, hitScore: scoreData.hitScore + 1 };

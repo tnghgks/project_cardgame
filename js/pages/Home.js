@@ -1,7 +1,12 @@
 import { routeChange } from "../lib/utils/router.js";
 
-export default function Home({ $target }) {
+export default function Home({ $target, props }) {
+  const { scoreManager } = props;
+
+  this.state = scoreManager.getScoreData();
+
   this.template = () => {
+    const { hitScore, failScore } = this.state;
     return `
   <div class="home">
     <h1 class="tit-game">피카츄 카드 게임</h1>
@@ -21,8 +26,8 @@ export default function Home({ $target }) {
         총 패배: /
         <strong>이전 기록</strong>
         뒤집은 총 횟수:
-        맞은 횟수:
-        틀린 횟수:
+        맞은 횟수:${hitScore}
+        틀린 횟수:${failScore}
         </marquee>
       </article>
     </main>
