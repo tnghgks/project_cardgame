@@ -45,8 +45,7 @@ export default function Result({ $target, props }) {
         routeChange("/");
       }
       if (target.classList.contains("btn-return")) {
-        routeChange("/cardGame/easy");
-        // routeChange("/"); // 임시
+        routeChange(`/cardGame/${history.state.data}`);
       }
     });
   };
