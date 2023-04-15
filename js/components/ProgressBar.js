@@ -8,7 +8,6 @@ export default function ProgressBar({ $target, props }) {
     this.render();
   };
 
-  // 타이머 함수
   this.template = () => {
     const { max, value } = this.state;
     return `<progress class="bar-style" max=${max} value=${value}></progress>`;

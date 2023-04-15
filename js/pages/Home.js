@@ -40,12 +40,10 @@ export default function Home({ $target, props }) {
   };
 
   this.setEvent = () => {
-    const $page = $target.querySelector(".home");
-
-    $page.addEventListener("click", (e) => {
+    $target.addEventListener("click", (e) => {
       e.preventDefault();
       if (e.target.tagName === "A") {
-        routeChange(e.target.href, e.target.dataset.level);
+        routeChange(e.target.href);
       }
     });
   };

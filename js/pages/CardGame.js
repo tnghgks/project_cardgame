@@ -49,7 +49,6 @@ export default function CardGame({ $target, props }) {
 
   this.render = () => {
     $target.innerHTML = this.template();
-    this.mount();
   };
 
   this.setEvent = () => {
@@ -99,6 +98,7 @@ export default function CardGame({ $target, props }) {
 
   this.setup = () => {
     this.render();
+    this.mount();
     this.setEvent();
     scoreManager.initScoreData();
   };
