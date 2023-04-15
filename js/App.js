@@ -36,6 +36,7 @@ export default function App({ $target }) {
     init(this.route);
 
     this.route();
+    scoreManager.getScoreByLocalStorage();
 
     window.addEventListener("popstate", this.route);
   };
