@@ -6,7 +6,6 @@ export default function TimerManager(scoreManager) {
   this.clearTime;
 
   this.setTimer = (setState, limitTime) => {
-    if (this.timerId) return;
     this.timerId = setInterval(() => {
       if (!scoreManager.getScoreData().winOrLose) {
         this.clearTime = --limitTime;

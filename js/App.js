@@ -14,16 +14,21 @@ export default function App({ $target }) {
 
     $target.innerHTML = "";
 
+    const $page = document.createElement("div");
+    $page.className = "page";
+    $target.appendChild($page);
+
     if (pathname === "/") {
-      new Home({ $target, props: { scoreManager } }).setup();
+      new Home({ $target: $page, props: { scoreManager } }).setup();
     } else if (pathname.indexOf("/cardGame/") === 0) {
       const [, , level] = pathname.split("/");
+
       new CardGame({
-        $target,
+        $target: $page,
         props: { level, scoreManager, timerManager },
       }).setup();
     } else if (pathname === "/result") {
-      new Result({ $target, props: { scoreManager } }).setup();
+      new Result({ $target: $page, props: { scoreManager } }).setup();
     }
   };
 
