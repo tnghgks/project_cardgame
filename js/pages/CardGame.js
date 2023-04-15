@@ -66,6 +66,7 @@ export default function CardGame({ $target, props }) {
         // 클릭한 카드가 이전과 동일한 카드일 시 리턴
         if (this.$previousCard === $currentCard) return;
 
+        scoreManager.addTotalFlip();
         // 카드 검증 시 두 카드 이외에 Event Block
         cardManager.disableCardEvent();
 
@@ -89,6 +90,7 @@ export default function CardGame({ $target, props }) {
           cardManager.replaceCard(this.$previousCard, $currentCard);
           scoreManager.addFailScore();
         }
+
         this.$previousCard = null;
       } else {
         this.$previousCard = $currentCard;

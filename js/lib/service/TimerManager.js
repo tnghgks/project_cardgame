@@ -1,4 +1,5 @@
 import { routeChange } from "../utils/router.js";
+import useLocalStorage from "../utils/useLocalStorage.js";
 
 export default function TimerManager(scoreManager) {
   this.scoreManager = scoreManager;
@@ -11,15 +12,20 @@ export default function TimerManager(scoreManager) {
         this.clearTime = --limitTime;
         setState({ value: limitTime });
 
-        if (this.isClear()) this.endGame();
+        if (this.isClear()) this.endGame("defeat");
       } else {
         scoreManager.setClearTime(this.clearTime);
-        this.endGame();
+        this.endGame("win");
       }
     }, 1000);
   };
 
-  this.endGame = () => {
+  this.endGame = (type) => {
+    if (type === "win") {
+      useLocalStorage.addOneToProperty("scoreBoard", "winCount");
+    } else if (type === "defeat") {
+      useLocalStorage.addOneToProperty("scoreBoard", "defeatCount");
+    }
     this.stopTimer();
     routeChange("/result");
   };
