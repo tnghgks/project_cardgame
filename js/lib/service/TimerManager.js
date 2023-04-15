@@ -21,13 +21,16 @@ export default function TimerManager(scoreManager) {
   };
 
   this.endGame = (type) => {
+    const { pathname } = location;
+    const [, , level] = pathname.split("/");
+
     if (type === "win") {
       useLocalStorage.addOneToProperty("scoreBoard", "winCount");
     } else if (type === "defeat") {
       useLocalStorage.addOneToProperty("scoreBoard", "defeatCount");
     }
     this.stopTimer();
-    routeChange("/result");
+    routeChange("/result", level);
   };
 
   this.stopTimer = () => {
