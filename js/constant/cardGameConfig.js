@@ -6,7 +6,7 @@ export const limitTime = {
 
 export const cardInitCount = {
   hard: 64,
-  normal: 32,
+  normal: 36,
   easy: 16,
 };
 
