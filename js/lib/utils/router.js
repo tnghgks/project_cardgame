@@ -1,7 +1,7 @@
 const ROUTE_CHANGE_EVENT = "ROUTE_CHANGE";
 
 export const init = (onRouterChange) => {
-  history.pushState(null, null, "/");
+  history.replaceState(null, null, "/");
   window.addEventListener(ROUTE_CHANGE_EVENT, () => {
     onRouterChange();
   });

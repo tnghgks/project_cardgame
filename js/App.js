@@ -38,7 +38,10 @@ export default function App({ $target }) {
     this.route();
     scoreManager.getScoreByLocalStorage();
 
-    window.addEventListener("popstate", this.route);
+    window.addEventListener("popstate", () => {
+      timerManager.stopTimer();
+      this.route();
+    });
   };
 
   this.setup();
