@@ -1,9 +1,8 @@
 # ⚡️ 포켓몬 카드 게임
 
 <img src="https://user-images.githubusercontent.com/72817156/205776380-b4879537-7d38-456f-9427-5226b0e28987.gif" width="1440">
-<a href="https://pokemon-cardgame.netlify.app">▶️ 포켓몬 카드 게임 하러가기</a>
+<a href="https://projectcardgame.tnghgks.repl.co/">▶️ 포켓몬 카드 게임 하러가기</a>
 <br><br>
-	@@ -8,55 +8,75 @@
 
 ### 카드를 뒤집어 같은 그림을 찾아 스코어를 내는 게임
 
@@ -67,15 +66,3 @@
   정보를 불러와 메인화면에서 렌더링을 해줍니다.
 
 <br><br>
-
-## 🐛 Fixed
-
-### 이미지 파일 크기 경량화
-
-### marquee태그 활용
-
-### 이미지 파일 종횡비 유지 (aspect ratio)
-
-## 🪄 Tech Stack
-
-- `HTML/CSS`
