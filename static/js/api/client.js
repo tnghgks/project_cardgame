@@ -1,6 +1,6 @@
 export const request = async (url, options = {}) => {
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(`/static/${url}`, options);
 
     if (response.ok) {
       const data = await response.json();

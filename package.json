@@ -1,0 +1,15 @@
+{
+  "name": "project_cardgame",
+  "version": "1.0.0",
+  "description": "<img src=\"https://user-images.githubusercontent.com/72817156/205776380-b4879537-7d38-456f-9427-5226b0e28987.gif\" width=\"1440\"> <a href=\"https://pokemon-cardgame.netlify.app\">▶️ 포켓몬 카드 게임 하러가기</a> <br><br> \t@@ -8,55 +8,75 @@",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
